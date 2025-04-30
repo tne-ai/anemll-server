@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request, Response, BackgroundTasks
+#!/usr/bin/env python
+from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Optional, Union, Literal
+from pydantic import BaseModel
+from typing import List, Dict, Optional
 import sys
 import os
 import json
@@ -14,7 +15,6 @@ from pathlib import Path
 import argparse
 import uvicorn
 import logging
-import numpy as np
 import torch
 import torch.nn.functional as F
 import uuid
@@ -23,12 +23,12 @@ import uuid
 from chat_full import (
     load_models, 
     initialize_tokenizer, 
+
+
     create_unified_state, 
     generate_next_token,
     run_prefill,
-    make_causal_mask,
-    TokenPrinter,
-    parse_args as chat_parse_args
+    make_causal_mask
 )
 
 # Configure logging
@@ -40,8 +40,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Hardcoded model directory path
-MODEL_DIR = "/example-path/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2"
-
+# MODEL_DIR = "/example-path/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2"
+MODEL_DIR = os.getenv("MODEL_DIR",
+                      default="./models/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2")
 # Global flag to control truncation
 ALLOW_TRUNCATION = False
 
@@ -559,7 +560,7 @@ def load_model_components():
         
         # Print more detailed error information
         logger.error("\nPlease ensure all model files exist and are accessible.")
-        logger.error(f"Expected files:")
+        logger.error("Expected files:")
         logger.error(f"  Embeddings: {embed_path}")
         logger.error(f"  LM Head: {lmhead_path}")
         logger.error(f"  FFN: {ffn_path}")
@@ -589,7 +590,7 @@ def load_model_components():
     if tokenizer is None:
         logger.error("Failed to initialize tokenizer")
         sys.exit(1)
-    
+ 
     # Create unified state
     state = create_unified_state(ffn_models, metadata['context_length'])
     
@@ -616,8 +617,9 @@ def main():
     load_model_components()
     
     # Start the server
-    host = "0.0.0.0"
-    port = 8000
+    host = os.getenv("HOST", default="0.0.0.0")
+    port = os.getenv("PORT", default=8400)
+    # port = 8400
     logger.info(f"Starting server on {host}:{port} (Truncation: {'Enabled' if ALLOW_TRUNCATION else 'Disabled'})")
     uvicorn.run(app, host=host, port=port)
 

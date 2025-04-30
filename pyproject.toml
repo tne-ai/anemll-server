@@ -1,0 +1,7 @@
+[project]
+description = "Apple Neural Engine MLL Server"
+readme = "README.md"
+requires-python = ">=3.12"
+name = "anemll-server"
+version = "0.1.0"
+dependencies = []

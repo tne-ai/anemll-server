@@ -15,26 +15,27 @@ A version of `chat_full.py` (from the [swift-inference](https://github.com/Aneml
 
 1. Install the required dependencies, preferably in a conda or venv environment
 
-
 ```bash
 pip install -r requirements.txt
-```
+# if you are using uv and direnv
+make install
 
+```
 
 2. You will also need to download an Anemll model. I have used [this one](https://huggingface.co/anemll/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2) from the official Anemll Huggingface, 0.1.1 should also work fine.
 
-
-
-
 ## Configuration
 
-
-Modify the `MODEL_DIR` variable in `server.py` to your Anemll model path. 
-
+Set the environment variable `MODEL_DIR` variable before running `server.py`.
+The `./models` is git ignored so this is a convenient place to put it
 
 ```python
-# Hardcoded model directory path
-MODEL_DIR = "/example-path/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2"
+# Install so you can do downloads
+pipx install "huggingface_hub[all]"
+huggingface-cli download anemll/anemll-DeepSeekR1-8B-ctx1024_0.1.1 --local-dir ./model
+huggingface-cli download anemll/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2 --local-dir ./model
+# if you just want some default
+make model
 ```
 
 ## Usage
@@ -43,6 +44,8 @@ Run the server with:
 
 ```bash
 python server.py
+# default port 7000 host 0.0.0.0
+PORT=7000 MODEL_DIR=model/ananemll-Meta-Llama-3.2-1B-ctx2048_0.1.2 make server
 ```
 
 The server will start on `0.0.0.0:8000` by default.
@@ -52,7 +55,6 @@ In order to connect Open WebUI to it, simply go to "Connections" in the settings
 ## Known issues, limitations
 
 Sometimes, but rarely, when you start the server you will get a GIL issue when you try to generate a response. Just restart the server and it will most likely work the next time you run it, and keep working from then on.
-
 
 ## One last thing
 
@@ -70,8 +72,8 @@ Example request:
 {
   "model": "anemll-model",
   "messages": [
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Hello, how are you?"}
+    { "role": "system", "content": "You are a helpful assistant." },
+    { "role": "user", "content": "Hello, how are you?" }
   ],
   "temperature": 0.7,
   "stream": true
@@ -81,7 +83,6 @@ Example request:
 ### `/v1/models`
 
 Lists available models. Needed to work with Open WebUI.
-
 
 ## Testing with curl
 
@@ -122,7 +123,6 @@ curl -X POST http://localhost:8000/v1/chat/completions \
 ```bash
 curl http://localhost:8000/v1/models
 ```
-
 
 ## Links
 
