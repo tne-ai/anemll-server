@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,32 +21,26 @@ import uuid
 
 # Import from chat_full.py
 from chat_full import (
-    load_models, 
-    initialize_tokenizer, 
-
-
-    create_unified_state, 
     generate_next_token,
     run_prefill,
-    make_causal_mask
 )
 
+# Import new dynamic model loading components
+from model_registry import ModelRegistry
+from model_manager import ModelManager
+from model_info import LoadedModel
+from config import get_config
+
 # Configure logging
+config = get_config()
 logging.basicConfig(
-    level=logging.INFO,
+    level=getattr(logging, config.log_level),
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[logging.StreamHandler(sys.stdout)]
 )
 logger = logging.getLogger(__name__)
 
-# Hardcoded model directory path
-# MODEL_DIR = "/example-path/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2"
-MODEL_DIR = os.getenv("MODEL_DIR",
-                      default="./models/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2")
-# Global flag to control truncation
-ALLOW_TRUNCATION = False
-
-app = FastAPI(title="Anemll API Server")
+app = FastAPI(title="Anemll API Server - Dynamic Model Loading")
 
 # Add CORS middleware
 app.add_middleware(
@@ -57,14 +51,9 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-# Global variables to store model components
-embed_model = None
-ffn_models = None
-lmhead_model = None
-tokenizer = None
-metadata = {}
-state = None
-causal_mask = None
+# Global model management
+model_registry: Optional[ModelRegistry] = None
+model_manager: Optional[ModelManager] = None
 
 # Pydantic models for API
 class Message(BaseModel):
@@ -94,21 +83,24 @@ class ChatCompletionResponse(BaseModel):
 
 class StreamingTokenGenerator:
     """Handles streaming of tokens for the API response."""
-    def __init__(self, embed_model, ffn_models, lmhead_model, tokenizer, metadata, state, causal_mask, messages, temperature=0.7):
-        self.embed_model = embed_model
-        self.ffn_models = ffn_models
-        self.lmhead_model = lmhead_model
-        self.tokenizer = tokenizer
-        self.metadata = metadata
-        self.state = state
-        self.causal_mask = causal_mask
+    def __init__(self, loaded_model: LoadedModel, messages, temperature=0.7):
+        # Extract components from loaded_model
+        self.loaded_model = loaded_model
+        self.embed_model = loaded_model.embed_model
+        self.ffn_models = loaded_model.ffn_models
+        self.lmhead_model = loaded_model.lmhead_model
+        self.tokenizer = loaded_model.tokenizer
+        self.metadata = loaded_model.metadata
+        self.state = loaded_model.state
+        self.causal_mask = loaded_model.causal_mask
+        
         self.messages = messages
         self.temperature = temperature
         self.token_queue = queue.Queue()
         self.stop_event = threading.Event()
         self.generation_thread = None
-        self.context_length = metadata['context_length']
-        self.batch_size = metadata['batch_size']
+        self.context_length = self.metadata['context_length']
+        self.batch_size = self.metadata['batch_size']
         self.queue_lock = threading.Lock()  # Add a lock for thread safety
 
     def start_generation(self):
@@ -134,7 +126,7 @@ class StreamingTokenGenerator:
             
             # Check if the input exceeds context length
             if base_input_ids.size(1) > self.context_length:
-                if ALLOW_TRUNCATION:
+                if config.allow_truncation:
                     logger.warning(f"Input length ({base_input_ids.size(1)}) exceeds context length ({self.context_length}). Truncating input.")
                     # Take the last context_length tokens to maintain the most recent context
                     base_input_ids = base_input_ids[:, -self.context_length:]
@@ -151,7 +143,7 @@ Anemll models have a strict context limit, which is specified at conversion time
 To automatically truncate inputs to fit the model context window, restart the 
 server with the --truncate flag:
 
-    python server.py --truncate
+    python anemll-server.py --truncate
 =============================================================================
 """
                     logger.error(error_message)
@@ -323,17 +315,28 @@ server with the --truncate flag:
 
 async def stream_chat_completion(request: ChatCompletionRequest):
     """Stream chat completion response."""
-    generator = StreamingTokenGenerator(
-        embed_model=embed_model,
-        ffn_models=ffn_models,
-        lmhead_model=lmhead_model,
-        tokenizer=tokenizer,
-        metadata=metadata,
-        state=state,
-        causal_mask=causal_mask,
-        messages=request.messages,
-        temperature=request.temperature
-    )
+    try:
+        # Get the requested model
+        loaded_model = await model_manager.get_model(request.model)
+        
+        generator = StreamingTokenGenerator(
+            loaded_model=loaded_model,
+            messages=request.messages,
+            temperature=request.temperature
+        )
+    except ValueError as e:
+        # Model not found in registry
+        available_models = model_registry.list_models()
+        raise HTTPException(
+            status_code=404,
+            detail=f"Model '{request.model}' not found. Available models: {available_models}"
+        )
+    except RuntimeError as e:
+        # Model loading failed
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to load model '{request.model}': {str(e)}"
+        )
     
     generator.start_generation()
     
@@ -395,17 +398,28 @@ async def stream_chat_completion(request: ChatCompletionRequest):
 
 async def generate_chat_completion(request: ChatCompletionRequest):
     """Generate non-streaming chat completion response."""
-    generator = StreamingTokenGenerator(
-        embed_model=embed_model,
-        ffn_models=ffn_models,
-        lmhead_model=lmhead_model,
-        tokenizer=tokenizer,
-        metadata=metadata,
-        state=state,
-        causal_mask=causal_mask,
-        messages=request.messages,
-        temperature=request.temperature
-    )
+    try:
+        # Get the requested model
+        loaded_model = await model_manager.get_model(request.model)
+        
+        generator = StreamingTokenGenerator(
+            loaded_model=loaded_model,
+            messages=request.messages,
+            temperature=request.temperature
+        )
+    except ValueError as e:
+        # Model not found in registry
+        available_models = model_registry.list_models()
+        raise HTTPException(
+            status_code=404,
+            detail=f"Model '{request.model}' not found. Available models: {available_models}"
+        )
+    except RuntimeError as e:
+        # Model loading failed
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to load model '{request.model}': {str(e)}"
+        )
     
     try:
         # Start token generation
@@ -465,163 +479,125 @@ async def chat_completions(request: ChatCompletionRequest):
 @app.options("/v1/models")
 async def list_models_v1():
     """List available models (v1 endpoint) - required for Open WebUI compatibility."""
-    model_name = "anemll-model"
-    
-    # Extract model name from the directory path if possible
     try:
-        model_dir = Path(MODEL_DIR)
-        if model_dir.name.startswith("anemll-"):
-            model_name = model_dir.name
-    except:
-        pass
+        models = model_registry.list_models()
+        created_time = int(time.time())
+        
+        return {
+            "object": "list",
+            "data": [
+                {
+                    "id": model_name,
+                    "object": "model",
+                    "created": created_time,
+                    "owned_by": "anemll",
+                    "permission": [],
+                    "root": model_name,
+                    "parent": None
+                }
+                for model_name in models
+            ]
+        }
+    except Exception as e:
+        logger.error(f"Error listing models: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to list models")
+
+@app.get("/v1/models/{model_name}")
+async def get_model_info(model_name: str):
+    """Get detailed information about a specific model."""
+    model_info = model_registry.get_model_info(model_name)
+    if not model_info:
+        available_models = model_registry.list_models()
+        raise HTTPException(
+            status_code=404,
+            detail=f"Model '{model_name}' not found. Available models: {available_models}"
+        )
     
+    return model_info.get_display_info()
+
+@app.get("/admin/cache/stats")
+async def get_cache_stats():
+    """Get model cache statistics (admin endpoint)."""
+    return model_manager.get_cache_stats()
+
+@app.post("/admin/cache/clear")
+async def clear_cache():
+    """Clear the model cache (admin endpoint)."""
+    model_manager.clear_cache()
+    return {"message": "Cache cleared successfully"}
+
+@app.post("/admin/models/refresh")
+async def refresh_models():
+    """Refresh the model registry (admin endpoint)."""
+    model_registry.refresh()
     return {
-        "object": "list",
-        "data": [
-            {
-                "id": model_name,
-                "object": "model",
-                "created": int(time.time()),
-                "owned_by": "anemll",
-                "permission": [],
-                "root": model_name,
-                "parent": None
-            }
-        ]
+        "message": "Model registry refreshed",
+        "available_models": model_registry.list_models()
     }
 
-def load_model_components():
-    """Load all model components."""
-    global embed_model, ffn_models, lmhead_model, tokenizer, metadata, state, causal_mask
+def initialize_model_system():
+    """Initialize the dynamic model loading system."""
+    global model_registry, model_manager
     
-    # Convert directory to absolute path
-    model_dir = Path(MODEL_DIR).resolve()
-    if not model_dir.exists():
-        logger.error(f"Model directory not found: {model_dir}")
-        sys.exit(1)
-        
-    logger.info(f"Using model directory: {model_dir}")
+    logger.info("Initializing dynamic model loading system")
     
-    # Load meta.yaml directly to get the exact parameters
-    meta_yaml_path = model_dir / "meta.yaml"
-    if not meta_yaml_path.exists():
-        logger.error(f"meta.yaml not found at {meta_yaml_path}")
-        sys.exit(1)
-        
     try:
-        import yaml
-        with open(meta_yaml_path, 'r') as f:
-            meta_yaml = yaml.safe_load(f)
+        # Initialize model registry
+        model_registry = ModelRegistry(config.model_dir)
+        logger.info(f"Model registry initialized with {len(model_registry)} models")
+        
+        # Initialize model manager with configured cache size
+        model_manager = ModelManager(model_registry, config.cache_size)
+        logger.info(f"Model manager initialized with cache size: {config.cache_size}")
+        
+        # Log available models
+        available_models = model_registry.list_models()
+        if available_models:
+            logger.info(f"Available models: {available_models}")
             
-        # Extract parameters from meta.yaml
-        params = meta_yaml['model_info']['parameters']
-        logger.info(f"Loaded parameters from meta.yaml: {params}")
+            # Preload models if configured
+            if config.preload_models:
+                logger.info(f"Preloading models: {config.preload_models}")
+                # Note: Preloading will happen on first request if not done here
+                # Could be enhanced to preload during startup in a background task
+        else:
+            logger.warning("No valid models found in model directory")
+            logger.warning("Server will start but no models will be available for inference")
         
-        # Use the model prefix from meta.yaml
-        prefix = params.get('model_prefix', 'llama')
-        
-        # Use the correct file names based on meta.yaml
-        embed_path = str(model_dir / f"{prefix}_embeddings.mlmodelc")
-        
-        # Handle chunked FFN models
-        num_chunks = int(params['num_chunks'])
-        lut_ffn = params['lut_ffn']
-        lut_suffix = f"_lut{lut_ffn}" if lut_ffn != 'none' else ''
-        
-        # For the first chunk
-        ffn_path = str(model_dir / f"{prefix}_FFN_PF{lut_suffix}_chunk_01of{num_chunks:02d}.mlmodelc")
-        
-        # LM head path
-        lut_lmhead = params['lut_lmhead']
-        lmhead_suffix = f"_lut{lut_lmhead}" if lut_lmhead != 'none' else ''
-        lmhead_path = str(model_dir / f"{prefix}_lm_head{lmhead_suffix}.mlmodelc")
-        
-        tokenizer_path = str(model_dir)
+    except FileNotFoundError as e:
+        logger.error(f"Model directory not found: {str(e)}")
+        sys.exit(1)
     except Exception as e:
-        logger.error(f"Error loading meta.yaml: {str(e)}")
+        logger.error(f"Failed to initialize model system: {str(e)}")
         sys.exit(1)
-    
-    # Create a chat_args object that matches what load_models expects
-    chat_args = argparse.Namespace()
-    chat_args.embed = embed_path
-    chat_args.ffn = ffn_path
-    chat_args.lmhead = lmhead_path
-    chat_args.tokenizer = tokenizer_path
-    chat_args.context_length = int(params['context_length'])  # Use context_length from meta.yaml
-    chat_args.batch_size = int(params['batch_size'])  # Use batch_size from meta.yaml
-    chat_args.d = MODEL_DIR
-    chat_args.meta = str(meta_yaml_path)  # Pass the meta.yaml path to load_models
-    
-    # Load models and extract metadata
-    try:
-        embed_model, ffn_models, lmhead_model, metadata = load_models(chat_args, {})
-    except Exception as e:
-        logger.error(f"Error loading models: {str(e)}")
-        
-        # Print more detailed error information
-        logger.error("\nPlease ensure all model files exist and are accessible.")
-        logger.error("Expected files:")
-        logger.error(f"  Embeddings: {embed_path}")
-        logger.error(f"  LM Head: {lmhead_path}")
-        logger.error(f"  FFN: {ffn_path}")
-        
-        # Check if files exist
-        logger.error("\nChecking if files exist:")
-        logger.error(f"  Embeddings exists: {os.path.exists(embed_path)}")
-        logger.error(f"  LM Head exists: {os.path.exists(lmhead_path)}")
-        logger.error(f"  FFN exists: {os.path.exists(ffn_path)}")
-        
-        # List files in the directory
-        logger.error("\nFiles in model directory:")
-        for file in os.listdir(model_dir):
-            logger.error(f"  {file}")
-        
-        sys.exit(1)
-    
-    # Log the metadata values without modifying them
-    logger.info(f"Using context length: {metadata['context_length']}")
-    logger.info(f"Using batch size: {metadata['batch_size']}")
-    logger.info(f"Using state length: {metadata['state_length']}")
-    
-    logger.info(f"Metadata: {metadata}")
-    
-    # Load tokenizer
-    tokenizer = initialize_tokenizer(tokenizer_path)
-    if tokenizer is None:
-        logger.error("Failed to initialize tokenizer")
-        sys.exit(1)
- 
-    # Create unified state
-    state = create_unified_state(ffn_models, metadata['context_length'])
-    
-    # Initialize causal mask
-    causal_mask = make_causal_mask(metadata['context_length'], 0)
-    causal_mask = torch.tensor(causal_mask, dtype=torch.float16)
-    # causal_mask = initialize_causal_mask()
-    
-    logger.info("Model components loaded successfully")
+
+async def preload_models():
+    """Preload configured models."""
+    for model_name in config.preload_models:
+        try:
+            logger.info(f"Preloading model: {model_name}")
+            await model_manager.get_model(model_name)
+            logger.info(f"Successfully preloaded model: {model_name}")
+        except Exception as e:
+            logger.warning(f"Failed to preload model {model_name}: {str(e)}")
 
 def main():
     """Main function to start the server."""
-    global ALLOW_TRUNCATION
     
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description="Anemll API Server")
+    parser = argparse.ArgumentParser(description="Anemll API Server - Dynamic Model Loading")
     parser.add_argument("--truncate", action="store_true", help="Enable automatic truncation of inputs that exceed model context length")
     args = parser.parse_args()
     
-    # Set global flags
-    ALLOW_TRUNCATION = args.truncate
+    # Update configuration with command line arguments
+    config.update_from_args(args)
     
-    # Load model components
-    load_model_components()
+    # Initialize the dynamic model loading system
+    initialize_model_system()
     
     # Start the server
-    host = os.getenv("HOST", default="0.0.0.0")
-    port = os.getenv("PORT", default=8400)
-    # port = 8400
-    logger.info(f"Starting server on {host}:{port} (Truncation: {'Enabled' if ALLOW_TRUNCATION else 'Disabled'})")
-    uvicorn.run(app, host=host, port=port)
+    logger.info(f"Starting server on {config.host}:{config.port} (Truncation: {'Enabled' if config.allow_truncation else 'Disabled'})")
+    uvicorn.run(app, host=config.host, port=config.port)
 
 if __name__ == "__main__":
     main() 

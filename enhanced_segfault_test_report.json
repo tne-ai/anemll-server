@@ -1,0 +1,393 @@
+{
+  "suite_info": {
+    "name": "Enhanced Segfault Test Suite with CoreML Error Classification",
+    "duration": 3.8389859199523926,
+    "timestamp": "2025-06-02T16:59:06.066747",
+    "overall_success": false
+  },
+  "test_summary": {
+    "total_tests": 4,
+    "successful_tests": 2,
+    "success_rate": 0.5,
+    "total_errors_detected": 13,
+    "total_recovery_attempts": 3,
+    "successful_recoveries": 0,
+    "recovery_success_rate": 0.0
+  },
+  "classification_statistics": {
+    "total_classifications": 13,
+    "by_category": {
+      "ane_driver": 4,
+      "memory_allocation": 3,
+      "thread_safety": 2,
+      "resource_exhaustion": 2,
+      "model_corruption": 2,
+      "unknown": 0
+    },
+    "by_severity": {
+      "critical": 7,
+      "high": 6,
+      "medium": 0,
+      "low": 0
+    },
+    "auto_recoveries_attempted": 3,
+    "auto_recoveries_successful": 0,
+    "auto_recovery_success_rate": 0.0
+  },
+  "test_results": [
+    {
+      "test_name": "error_classification",
+      "success": false,
+      "duration": 0.0017001628875732422,
+      "errors_detected": 5,
+      "classified_errors": [
+        {
+          "original_error": "ANE device not available",
+          "error_type": "Exception",
+          "category": "ane_driver",
+          "severity": "critical",
+          "confidence": 0.35,
+          "matched_patterns": [
+            "ANE Device Unavailable"
+          ],
+          "context": {
+            "timestamp": "2025-06-02T16:59:02.227771",
+            "location": "unknown",
+            "model_name": null,
+            "operation": "model_loading",
+            "system_state": {
+              "cpu_percent": 20.9,
+              "memory_percent": 58.1,
+              "available_memory": 57552125952,
+              "disk_usage": 10.9,
+              "load_average": [
+                3.9541015625,
+                4.47998046875,
+                4.98828125
+              ],
+              "process_count": 987
+            },
+            "thread_info": {
+              "thread_count": 1,
+              "current_thread": "MainThread",
+              "is_main_thread": true
+            },
+            "memory_info": {
+              "total": 137438953472,
+              "available": 57552125952,
+              "percent": 58.1,
+              "used": 60824961024,
+              "free": 1396899840
+            },
+            "stacktrace": null,
+            "previous_errors": []
+          },
+          "description": "ANE hardware device is not available or failed to initialize",
+          "potential_causes": [
+            "Hardware not supporting ANE",
+            "ANE driver issues",
+            "System resource conflicts",
+            "Thermal throttling"
+          ],
+          "recovery_strategy": "ANE Device Unavailable Recovery",
+          "recovery_steps": [
+            "Switch to CPU-only execution mode",
+            "Disable ANE acceleration for current session",
+            "Retry model loading with CPU backend",
+            "Monitor system for ANE availability recovery"
+          ],
+          "can_auto_recover": true,
+          "estimated_recovery_time": 45.0,
+          "classification_time": 0.00041866302490234375
+        },
+        {
+          "original_error": "Failed to allocate tensor memory",
+          "error_type": "MemoryError",
+          "category": "memory_allocation",
+          "severity": "critical",
+          "confidence": 0.3857142857142857,
+          "matched_patterns": [
+            "Tensor Allocation Failure"
+          ],
+          "context": {
+            "timestamp": "2025-06-02T16:59:02.228247",
+            "location": "unknown",
+            "model_name": null,
+            "operation": "tensor_allocation",
+            "system_state": {
+              "cpu_percent": 0.0,
+              "memory_percent": 58.1,
+              "available_memory": 57552125952,
+              "disk_usage": 10.9,
+              "load_average": [
+                3.9541015625,
+                4.47998046875,
+                4.98828125
+              ],
+              "process_count": 987
+            },
+            "thread_info": {
+              "thread_count": 1,
+              "current_thread": "MainThread",
+              "is_main_thread": true
+            },
+            "memory_info": {
+              "total": 137438953472,
+              "available": 57552125952,
+              "percent": 58.1,
+              "used": 60824961024,
+              "free": 1396899840
+            },
+            "stacktrace": null,
+            "previous_errors": []
+          },
+          "description": "Failed to allocate memory for large tensors during model loading",
+          "potential_causes": [
+            "Large model size",
+            "Insufficient system memory",
+            "Memory fragmentation",
+            "Multiple models loaded"
+          ],
+          "recovery_strategy": "Tensor Allocation Failure Recovery",
+          "recovery_steps": [
+            "Clear unused models from cache",
+            "Reduce tensor precision if possible",
+            "Retry allocation with reduced memory footprint",
+            "Fall back to smaller model variant if available"
+          ],
+          "can_auto_recover": true,
+          "estimated_recovery_time": 45.0,
+          "classification_time": 0.00019097328186035156
+        },
+        {
+          "original_error": "CoreML model compilation failed",
+          "error_type": "RuntimeError",
+          "category": "ane_driver",
+          "severity": "critical",
+          "confidence": 0.3222222222222222,
+          "matched_patterns": [
+            "CoreML Framework Error"
+          ],
+          "context": {
+            "timestamp": "2025-06-02T16:59:02.228477",
+            "location": "unknown",
+            "model_name": null,
+            "operation": "model_compilation",
+            "system_state": {
+              "cpu_percent": 0.0,
+              "memory_percent": 58.1,
+              "available_memory": 57552125952,
+              "disk_usage": 10.9,
+              "load_average": [
+                3.9541015625,
+                4.47998046875,
+                4.98828125
+              ],
+              "process_count": 987
+            },
+            "thread_info": {
+              "thread_count": 1,
+              "current_thread": "MainThread",
+              "is_main_thread": true
+            },
+            "memory_info": {
+              "total": 137438953472,
+              "available": 57552125952,
+              "percent": 58.1,
+              "used": 60824961024,
+              "free": 1396899840
+            },
+            "stacktrace": null,
+            "previous_errors": []
+          },
+          "description": "CoreML framework encountered a critical error",
+          "potential_causes": [
+            "Invalid model format",
+            "Hardware incompatibility",
+            "Driver version mismatch",
+            "Framework corruption"
+          ],
+          "recovery_strategy": "ANE Device Unavailable Recovery",
+          "recovery_steps": [
+            "Switch to CPU-only execution mode",
+            "Disable ANE acceleration for current session",
+            "Retry model loading with CPU backend",
+            "Monitor system for ANE availability recovery"
+          ],
+          "can_auto_recover": true,
+          "estimated_recovery_time": 45.0,
+          "classification_time": 0.0002532005310058594
+        },
+        {
+          "original_error": "Too many open files",
+          "error_type": "OSError",
+          "category": "resource_exhaustion",
+          "severity": "high",
+          "confidence": 0.25,
+          "matched_patterns": [
+            "System Resource Exhaustion"
+          ],
+          "context": {
+            "timestamp": "2025-06-02T16:59:02.228795",
+            "location": "unknown",
+            "model_name": null,
+            "operation": "file_operations",
+            "system_state": {
+              "cpu_percent": 0.0,
+              "memory_percent": 58.1,
+              "available_memory": 57552125952,
+              "disk_usage": 10.9,
+              "load_average": [
+                3.9541015625,
+                4.47998046875,
+                4.98828125
+              ],
+              "process_count": 987
+            },
+            "thread_info": {
+              "thread_count": 1,
+              "current_thread": "MainThread",
+              "is_main_thread": true
+            },
+            "memory_info": {
+              "total": 137438953472,
+              "available": 57552125952,
+              "percent": 58.1,
+              "used": 60824961024,
+              "free": 1396899840
+            },
+            "stacktrace": null,
+            "previous_errors": []
+          },
+          "description": "System resources exhausted during model operations",
+          "potential_causes": [
+            "Too many concurrent requests",
+            "File descriptor leaks",
+            "Process limit reached",
+            "System resource pressure"
+          ],
+          "recovery_strategy": "System Resource Exhaustion Recovery",
+          "recovery_steps": [
+            "Free unused system resources",
+            "Reduce resource consumption",
+            "Monitor resource usage closely",
+            "Implement resource limits"
+          ],
+          "can_auto_recover": true,
+          "estimated_recovery_time": 20.0,
+          "classification_time": 0.00029397010803222656
+        },
+        {
+          "original_error": "Invalid model format",
+          "error_type": "ValueError",
+          "category": "model_corruption",
+          "severity": "high",
+          "confidence": 0.2857142857142857,
+          "matched_patterns": [
+            "Invalid Model Format"
+          ],
+          "context": {
+            "timestamp": "2025-06-02T16:59:02.229158",
+            "location": "unknown",
+            "model_name": null,
+            "operation": "model_validation",
+            "system_state": {
+              "cpu_percent": 0.0,
+              "memory_percent": 58.1,
+              "available_memory": 57552125952,
+              "disk_usage": 10.9,
+              "load_average": [
+                3.9541015625,
+                4.47998046875,
+                4.98828125
+              ],
+              "process_count": 987
+            },
+            "thread_info": {
+              "thread_count": 1,
+              "current_thread": "MainThread",
+              "is_main_thread": true
+            },
+            "memory_info": {
+              "total": 137438953472,
+              "available": 57552125952,
+              "percent": 58.1,
+              "used": 60824961024,
+              "free": 1396899840
+            },
+            "stacktrace": null,
+            "previous_errors": []
+          },
+          "description": "Model file format is invalid or corrupted",
+          "potential_causes": [
+            "Incomplete model download",
+            "File corruption",
+            "Wrong model format",
+            "Version incompatibility"
+          ],
+          "recovery_strategy": "Invalid Model Format Recovery",
+          "recovery_steps": [
+            "Re-download model from source",
+            "Use backup model if available",
+            "Implement model integrity checking"
+          ],
+          "can_auto_recover": true,
+          "estimated_recovery_time": 360.0,
+          "classification_time": 0.00025582313537597656
+        }
+      ],
+      "recovery_attempts": 0,
+      "successful_recoveries": 0,
+      "performance_metrics": {
+        "classification_time_avg": 0.00034003257751464845
+      },
+      "timestamp": "2025-06-02 16:59:02.229559"
+    },
+    {
+      "test_name": "enhanced_recovery",
+      "success": true,
+      "duration": 3.8331308364868164,
+      "errors_detected": 0,
+      "classified_errors": [],
+      "recovery_attempts": 0,
+      "successful_recoveries": 0,
+      "performance_metrics": {
+        "recovery_success_rate": 0.0
+      },
+      "timestamp": "2025-06-02 16:59:06.062737"
+    },
+    {
+      "test_name": "pattern_recognition",
+      "success": true,
+      "duration": 0.001893758773803711,
+      "errors_detected": 5,
+      "classified_errors": [],
+      "recovery_attempts": 0,
+      "successful_recoveries": 0,
+      "performance_metrics": {
+        "accuracy": 1.0,
+        "correct_classifications": 5,
+        "total_test_cases": 5
+      },
+      "timestamp": "2025-06-02 16:59:06.065694"
+    },
+    {
+      "test_name": "auto_recovery_performance",
+      "success": false,
+      "duration": 0.0009808540344238281,
+      "errors_detected": 3,
+      "classified_errors": [],
+      "recovery_attempts": 3,
+      "successful_recoveries": 0,
+      "performance_metrics": {
+        "recovery_success_rate": 0.0,
+        "avg_recovery_time": 5.165735880533854e-05,
+        "max_recovery_time": 9.083747863769531e-05,
+        "min_recovery_time": 2.4080276489257812e-05
+      },
+      "timestamp": "2025-06-02 16:59:06.066713"
+    }
+  ],
+  "classified_errors": [],
+  "recommendations": []
+}

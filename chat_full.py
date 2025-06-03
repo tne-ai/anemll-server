@@ -1,16 +1,14 @@
-# chat.py
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # chat.py
 # Copyright (c) 2025 Anemll
 # Licensed under the MIT License
 
 import argparse
-import os
 import re
 import glob
 from pathlib import Path
 import coremltools as ct
-from transformers import LlamaTokenizer, AutoTokenizer
+from transformers import AutoTokenizer
 import torch
 import torch.nn.functional as F
 import numpy as np
@@ -446,7 +444,7 @@ def initialize_tokenizer(model_path=None):
         
         tokenizer.padding_side = "left"
         
-        print(f"\nSpecial Tokens:")
+        print("\nSpecial Tokens:")
         print(f"PAD token: '{tokenizer.pad_token}' (ID: {tokenizer.pad_token_id})")
         print(f"EOS token: '{tokenizer.eos_token}' (ID: {tokenizer.eos_token_id})")
         print(f"BOS token: '{tokenizer.bos_token}' (ID: {tokenizer.bos_token_id})")

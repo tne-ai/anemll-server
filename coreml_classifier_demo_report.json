@@ -1,0 +1,627 @@
+{
+  "demo_info": {
+    "name": "CoreML Error Classification System Demo",
+    "timestamp": "2025-06-02T12:54:20.314227",
+    "version": "1.0"
+  },
+  "system_statistics": {
+    "classifier_stats": {
+      "total_classifications": 12,
+      "by_category": {
+        "ane_driver": 3,
+        "memory_allocation": 3,
+        "thread_safety": 2,
+        "resource_exhaustion": 1,
+        "model_corruption": 1,
+        "unknown": 2
+      },
+      "by_severity": {
+        "critical": 6,
+        "high": 4,
+        "medium": 2,
+        "low": 0
+      },
+      "auto_recoveries_attempted": 2,
+      "auto_recoveries_successful": 0,
+      "auto_recovery_success_rate": 0.0
+    },
+    "pattern_summary": {
+      "total_patterns": 14,
+      "by_category": {
+        "ane_driver": 3,
+        "memory_allocation": 4,
+        "thread_safety": 3,
+        "resource_exhaustion": 2,
+        "model_corruption": 2
+      },
+      "by_severity": {
+        "critical": 5,
+        "high": 6,
+        "medium": 3
+      },
+      "critical_patterns": [
+        {
+          "name": "ANE Device Unavailable",
+          "category": "ane_driver",
+          "signatures": [
+            "ANE device not available",
+            "Neural Engine initialization error",
+            "ane device creation failed"
+          ]
+        },
+        {
+          "name": "CoreML Framework Error",
+          "category": "ane_driver",
+          "signatures": [
+            "CoreML model compilation failed",
+            "com.apple.CoreML error",
+            "MLModel prediction failed"
+          ]
+        },
+        {
+          "name": "Tensor Allocation Failure",
+          "category": "memory_allocation",
+          "signatures": [
+            "Failed to allocate tensor memory",
+            "Cannot allocate memory for tensor",
+            "Tensor allocation failed"
+          ]
+        },
+        {
+          "name": "GPU Memory Exhausted",
+          "category": "memory_allocation",
+          "signatures": [
+            "GPU memory exhausted",
+            "CUDA out of memory",
+            "Metal out of memory"
+          ]
+        },
+        {
+          "name": "Memory Corruption",
+          "category": "memory_allocation",
+          "signatures": [
+            "malloc(): corrupted top size",
+            "double free or corruption",
+            "heap corruption detected"
+          ]
+        }
+      ]
+    },
+    "strategy_count": 10
+  },
+  "demo_results": [
+    {
+      "demo_name": "error_pattern_recognition",
+      "results": [
+        {
+          "test_case": "ANE Driver Failure",
+          "correct_classification": true,
+          "confidence": 0.6,
+          "classification_time": 0.0006551742553710938,
+          "classified_error": {
+            "original_error": "ANE device not available - Neural Engine initialization error",
+            "error_type": "RuntimeError",
+            "category": "ane_driver",
+            "severity": "critical",
+            "confidence": 0.6,
+            "matched_patterns": [
+              "ANE Device Unavailable"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.306935",
+              "location": "model_manager.py:_load_model",
+              "model_name": null,
+              "operation": "model_loading",
+              "system_state": {
+                "cpu_percent": 20.5,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "ANE hardware device is not available or failed to initialize",
+            "potential_causes": [
+              "Hardware not supporting ANE",
+              "ANE driver issues",
+              "System resource conflicts",
+              "Thermal throttling"
+            ],
+            "recovery_strategy": "ANE Device Unavailable Recovery",
+            "recovery_steps": [
+              "Switch to CPU-only execution mode",
+              "Disable ANE acceleration for current session",
+              "Retry model loading with CPU backend",
+              "Monitor system for ANE availability recovery"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 45.0,
+            "classification_time": 0.0005960464477539062
+          }
+        },
+        {
+          "test_case": "Memory Allocation Failure",
+          "correct_classification": true,
+          "confidence": 0.3857142857142857,
+          "classification_time": 0.00054931640625,
+          "classified_error": {
+            "original_error": "Failed to allocate tensor memory - GPU memory exhausted",
+            "error_type": "MemoryError",
+            "category": "memory_allocation",
+            "severity": "critical",
+            "confidence": 0.3857142857142857,
+            "matched_patterns": [
+              "Tensor Allocation Failure",
+              "GPU Memory Exhausted"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.307829",
+              "location": "model_manager.py:create_unified_state",
+              "model_name": null,
+              "operation": "tensor_allocation",
+              "system_state": {
+                "cpu_percent": 50.0,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "Failed to allocate memory for large tensors during model loading",
+            "potential_causes": [
+              "Large model size",
+              "Insufficient system memory",
+              "Memory fragmentation",
+              "Multiple models loaded"
+            ],
+            "recovery_strategy": "Tensor Allocation Failure Recovery",
+            "recovery_steps": [
+              "Clear unused models from cache",
+              "Reduce tensor precision if possible",
+              "Retry allocation with reduced memory footprint",
+              "Fall back to smaller model variant if available"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 45.0,
+            "classification_time": 0.0004961490631103516
+          }
+        },
+        {
+          "test_case": "Thread Safety Issue",
+          "correct_classification": true,
+          "confidence": 0.4857142857142857,
+          "classification_time": 0.00026988983154296875,
+          "classified_error": {
+            "original_error": "concurrent access violation - threading lock timeout",
+            "error_type": "RuntimeError",
+            "category": "thread_safety",
+            "severity": "high",
+            "confidence": 0.4857142857142857,
+            "matched_patterns": [
+              "Concurrent Access Violation",
+              "Threading Deadlock",
+              "Queue Operation Failed"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.308485",
+              "location": "anemll-server.py:StreamingTokenGenerator",
+              "model_name": null,
+              "operation": "model_switching",
+              "system_state": {
+                "cpu_percent": 0.0,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "Concurrent access to shared resources without proper synchronization",
+            "potential_causes": [
+              "Multiple simultaneous requests",
+              "Model switching during inference",
+              "Cache operations during loading",
+              "Queue access conflicts"
+            ],
+            "recovery_strategy": "Concurrent Access Violation Recovery",
+            "recovery_steps": [
+              "Reset shared state to consistent state",
+              "Enable stricter locking mechanisms",
+              "Retry operation with sequential access",
+              "Monitor for future threading violations"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 45.0,
+            "classification_time": 0.00023603439331054688
+          }
+        },
+        {
+          "test_case": "Resource Exhaustion",
+          "correct_classification": true,
+          "confidence": 0.5,
+          "classification_time": 0.00023698806762695312,
+          "classified_error": {
+            "original_error": "Too many open files - Resource temporarily unavailable",
+            "error_type": "OSError",
+            "category": "resource_exhaustion",
+            "severity": "high",
+            "confidence": 0.5,
+            "matched_patterns": [
+              "System Resource Exhaustion"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.308841",
+              "location": "model_loading",
+              "model_name": null,
+              "operation": "file_operations",
+              "system_state": {
+                "cpu_percent": 0.0,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "System resources exhausted during model operations",
+            "potential_causes": [
+              "Too many concurrent requests",
+              "File descriptor leaks",
+              "Process limit reached",
+              "System resource pressure"
+            ],
+            "recovery_strategy": "System Resource Exhaustion Recovery",
+            "recovery_steps": [
+              "Free unused system resources",
+              "Reduce resource consumption",
+              "Monitor resource usage closely",
+              "Implement resource limits"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 20.0,
+            "classification_time": 0.00020813941955566406
+          }
+        },
+        {
+          "test_case": "Model Corruption",
+          "correct_classification": true,
+          "confidence": 0.5714285714285714,
+          "classification_time": 0.00023126602172851562,
+          "classified_error": {
+            "original_error": "Invalid model format - Corrupted .mlmodelc file",
+            "error_type": "ValueError",
+            "category": "model_corruption",
+            "severity": "high",
+            "confidence": 0.5714285714285714,
+            "matched_patterns": [
+              "Invalid Model Format"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.309160",
+              "location": "chat_full.py:load_model",
+              "model_name": null,
+              "operation": "model_validation",
+              "system_state": {
+                "cpu_percent": 0.0,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "Model file format is invalid or corrupted",
+            "potential_causes": [
+              "Incomplete model download",
+              "File corruption",
+              "Wrong model format",
+              "Version incompatibility"
+            ],
+            "recovery_strategy": "Invalid Model Format Recovery",
+            "recovery_steps": [
+              "Re-download model from source",
+              "Use backup model if available",
+              "Implement model integrity checking"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 360.0,
+            "classification_time": 0.00020122528076171875
+          }
+        }
+      ],
+      "summary": {
+        "accuracy": 1.0,
+        "avg_confidence": 0.5085714285714286,
+        "avg_classification_time": 0.00038852691650390623
+      }
+    },
+    {
+      "demo_name": "error_classification_and_recovery",
+      "results": [
+        {
+          "error_case": "Critical ANE Failure",
+          "classified_error": {
+            "original_error": "CoreML model compilation failed - ANE device not available",
+            "error_type": "RuntimeError",
+            "category": "ane_driver",
+            "severity": "critical",
+            "confidence": 0.35,
+            "matched_patterns": [
+              "ANE Device Unavailable",
+              "CoreML Framework Error"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.309544",
+              "location": "model_manager.py:139",
+              "model_name": "anemll-Meta-Llama-3.2-1B",
+              "operation": "model_loading",
+              "system_state": {
+                "cpu_percent": 0.0,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "ANE hardware device is not available or failed to initialize",
+            "potential_causes": [
+              "Hardware not supporting ANE",
+              "ANE driver issues",
+              "System resource conflicts",
+              "Thermal throttling"
+            ],
+            "recovery_strategy": "ANE Device Unavailable Recovery",
+            "recovery_steps": [
+              "Switch to CPU-only execution mode",
+              "Disable ANE acceleration for current session",
+              "Retry model loading with CPU backend",
+              "Monitor system for ANE availability recovery"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 45.0,
+            "classification_time": 0.00020503997802734375
+          }
+        },
+        {
+          "error_case": "Critical Memory Failure",
+          "classified_error": {
+            "original_error": "malloc(): corrupted top size - segfault in create_unified_state",
+            "error_type": "MemoryError",
+            "category": "memory_allocation",
+            "severity": "critical",
+            "confidence": 0.6,
+            "matched_patterns": [
+              "Memory Corruption"
+            ],
+            "context": {
+              "timestamp": "2025-06-02T12:54:20.309933",
+              "location": "model_manager.py:147",
+              "model_name": "anemll-DeepSeekR1-8B",
+              "operation": "tensor_allocation",
+              "system_state": {
+                "cpu_percent": 0.0,
+                "memory_percent": 49.2,
+                "available_memory": 69834194944,
+                "disk_usage": 8.2,
+                "load_average": [
+                  4.23974609375,
+                  5.1494140625,
+                  5.08642578125
+                ],
+                "process_count": 928
+              },
+              "thread_info": {
+                "thread_count": 1,
+                "current_thread": "MainThread",
+                "is_main_thread": true
+              },
+              "memory_info": {
+                "total": 137438953472,
+                "available": 69834194944,
+                "percent": 49.2,
+                "used": 48395091968,
+                "free": 25246679040
+              },
+              "stacktrace": null,
+              "previous_errors": []
+            },
+            "description": "Memory corruption during tensor operations",
+            "potential_causes": [
+              "Buffer overflows",
+              "Use after free",
+              "Threading issues",
+              "Hardware memory errors"
+            ],
+            "recovery_strategy": "Tensor Allocation Failure Recovery",
+            "recovery_steps": [
+              "Clear unused models from cache",
+              "Reduce tensor precision if possible",
+              "Retry allocation with reduced memory footprint",
+              "Fall back to smaller model variant if available"
+            ],
+            "can_auto_recover": true,
+            "estimated_recovery_time": 45.0,
+            "classification_time": 0.0002009868621826172
+          }
+        }
+      ]
+    },
+    {
+      "demo_name": "context_aware_classification",
+      "results": [
+        {
+          "context_name": "Model Loading Context",
+          "category": "unknown",
+          "severity": "medium",
+          "confidence": 0.0
+        },
+        {
+          "context_name": "Tensor Operation Context",
+          "category": "unknown",
+          "severity": "medium",
+          "confidence": 0.0
+        },
+        {
+          "context_name": "Concurrent Access Context",
+          "category": "thread_safety",
+          "severity": "high",
+          "confidence": 0.2
+        }
+      ]
+    },
+    {
+      "demo_name": "monitoring_integration",
+      "results": [
+        {
+          "scenario": "Successful Operation",
+          "result": "success",
+          "errors_detected": 0
+        },
+        {
+          "scenario": "ANE Failure",
+          "result": "classified_error",
+          "errors_detected": 1
+        },
+        {
+          "scenario": "Memory Failure",
+          "result": "classified_error",
+          "errors_detected": 1
+        }
+      ]
+    },
+    {
+      "demo_name": "recovery_strategy_execution",
+      "results": [
+        {
+          "strategy_name": "ANE Device Unavailable Recovery",
+          "category": "ane_driver",
+          "steps_count": 4,
+          "auto_recovery_enabled": true
+        },
+        {
+          "strategy_name": "Tensor Allocation Failure Recovery",
+          "category": "memory_allocation",
+          "steps_count": 4,
+          "auto_recovery_enabled": true
+        },
+        {
+          "strategy_name": "Concurrent Access Violation Recovery",
+          "category": "thread_safety",
+          "steps_count": 4,
+          "auto_recovery_enabled": true
+        }
+      ]
+    }
+  ]
+}

@@ -26,13 +26,13 @@ make install
 
 ## Configuration
 
-Set the environment variable `MODEL_DIR` variable before running `server.py`.
+Set the environment variable `MODEL_DIR` variable before running `anemll-server.py`.
 The `./models` is git ignored so this is a convenient place to put it
 
 ```python
 # Install so you can do downloads
 pipx install "huggingface_hub[all]"
-huggingface-cli download anemll/anemll-DeepSeekR1-8B-ctx1024_0.1.1 --local-dir ./model
+huggingface-cli download anemll/anemll-DeepSeekR1-8B-ctx1024_0.2.0 --local-dir ./model
 huggingface-cli download anemll/anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2 --local-dir ./model
 # if you just want some default
 make model
@@ -43,7 +43,7 @@ make model
 Run the server with:
 
 ```bash
-python server.py
+python anemll-server.py
 # default port 7000 host 0.0.0.0
 PORT=7000 MODEL_DIR=model/ananemll-Meta-Llama-3.2-1B-ctx2048_0.1.2 make server
 ```
