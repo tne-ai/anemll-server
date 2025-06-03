@@ -29,7 +29,7 @@ models:
 .PHONY: run
 run:
 	if ! lsof -i:$(PORT) -sTCP:LISTEN; then \
-		PORT=$(PORT) python anemll-server.py; \
+		PORT=$(PORT) python anemll-server-core.py; \
 	fi
 
 ## chat: run simple chat to test a running server

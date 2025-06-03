@@ -111,3 +111,19 @@ This file tracks the project's progress using a task list format.
   - Pushed changes to remote repository (github.com:tne-ai/anemll-server, branch: rich-as)
   - Commit hash: 63c60ef (11 objects, 69.58 KiB compressed)
   - All test validation results, Memory Bank updates, and enhanced reports now preserved in version control
+[2025-06-02 18:51:12] - **V1 TAG CREATED AND PUSHED**
+  - Successfully created annotated tag v1 with message "dynamic model switch, memory check"
+  - Tag pushed to remote repository (github.com:tne-ai/anemll-server)
+  - Version milestone captured: comprehensive test suite validation, memory management system, dynamic model loading capabilities
+[2025-06-02 22:35:00] - ✅ **COMPLETED**: File Renaming - anemll-server.py → anemll-server-core.py
+  - Renamed main server file from anemll-server.py to anemll-server-core.py
+  - Updated critical operational references: Makefile, anemll-server.py, segfault_handler.py, test_segfault_recovery.py
+  - Updated documentation: README.md and internal file references
+  - Server monitoring and restart functionality now uses correct filename
+  - Ready to continue with memory exception debugging
+[2025-06-02 22:52:00] - ✅ **COMPLETED**: Master Process Rename - anemll-server-v2.py → anemll-server.py
+  - Renamed master monitoring process from anemll-server-v2.py to anemll-server.py
+  - Updated internal file reference in anemll-server.py error message
+  - **Architecture Note**: anemll-server.py is the master process that monitors anemll-server-core.py and restarts it as needed for crash recovery
+  - **Process Hierarchy**: anemll-server.py (master monitor) → anemll-server-core.py (core API server)
+  - All file renames now complete and properly documented

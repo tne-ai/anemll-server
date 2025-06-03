@@ -1,3 +1,20 @@
+Metadata-Version: 2.4
+Name: anemll-server
+Version: 0.1.0
+Summary: Apple Neural Engine MLL Server
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.115.11
+Requires-Dist: uvicorn>=0.34.0
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: torch>=2.6.0
+Requires-Dist: numpy>=2.0.2
+Requires-Dist: transformers>=4.49.0
+Requires-Dist: coremltools>=8.2
+Requires-Dist: PyYAML>=6.0.2
+Requires-Dist: python-multipart>=0.0.20
+Requires-Dist: aiohttp>=3.11.13
+
 # Anemll Server
 
 This is an OpenAI-compatible API server for [Anemll](https://github.com/Anemll/Anemll) models. It provides a `/v1/chat/completions` endpoint that follows the OpenAI API format. It also provides the `/v1/models` endpoint which allows it to work with Open WebUI.
@@ -26,7 +43,7 @@ make install
 
 ## Configuration
 
-Set the environment variable `MODEL_DIR` variable before running `anemll-server-core.py`.
+Set the environment variable `MODEL_DIR` variable before running `anemll-server.py`.
 The `./models` is git ignored so this is a convenient place to put it
 
 ```python
@@ -43,7 +60,7 @@ make model
 Run the server with:
 
 ```bash
-python anemll-server-core.py
+python anemll-server.py
 # default port 7000 host 0.0.0.0
 PORT=7000 MODEL_DIR=model/ananemll-Meta-Llama-3.2-1B-ctx2048_0.1.2 make server
 ```

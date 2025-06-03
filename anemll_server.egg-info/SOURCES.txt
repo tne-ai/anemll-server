@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+anemll_server.egg-info/PKG-INFO
+anemll_server.egg-info/SOURCES.txt
+anemll_server.egg-info/dependency_links.txt
+anemll_server.egg-info/requires.txt
+anemll_server.egg-info/top_level.txt

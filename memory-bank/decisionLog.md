@@ -120,3 +120,21 @@ This file records architectural and implementation decisions using a list format
     *   The `get_model_parameters_from_config` function will be deprecated/removed.
 *   **Impact**: This is a global change affecting how the server estimates memory requirements for all models. Existing tests will implicitly use this new logic.
 *   **Supersedes**: This decision supersedes the part of "[2025-01-02 17:47:23] - Refined Memory Assessment Strategy" that specified extracting parameters from Huggingface config files.
+## Decision: Graceful Memory Exhaustion Handling
+
+[2025-06-02 22:43:00] - Fixed FastAPI exception crash when insufficient memory by implementing graceful degradation instead of raising HTTPException during streaming responses.
+
+## Rationale
+
+* **ASGI Compatibility**: HTTPException cannot be raised after streaming response has started without crashing ASGI application
+* **User Experience**: Graceful error messages are better than server crashes
+* **API Consistency**: Error responses should follow OpenAI API format even for resource exhaustion
+* **Operational Stability**: Server should continue running and serving other requests even when some models can't be loaded
+
+## Implementation Details
+
+* **Streaming Responses**: Return async generator that yields proper SSE-formatted error messages instead of raising HTTPException
+* **Non-Streaming Responses**: Return proper JSON error response with 'error' finish_reason instead of raising HTTPException  
+* **Comprehensive Coverage**: Applied same pattern to all error conditions (memory insufficient, model not found, loading failed)
+* **Diagnostic Logging**: Added clear logging to distinguish between memory checks and graceful degradation
+* **Error Message Format**: Consistent "❌ [error description]. Please try a smaller model or free up memory." format

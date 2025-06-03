@@ -54,7 +54,7 @@ class SegfaultTestCase:
         """Start the Anemll server process."""
         logger.info("Starting Anemll server...")
         
-        cmd = [sys.executable, "anemll-server.py"]
+        cmd = [sys.executable, "anemll-server-core.py"]
         if crash_simulation:
             # Add environment variables that might trigger edge cases
             env = os.environ.copy()

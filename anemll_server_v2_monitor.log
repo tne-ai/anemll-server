@@ -1,0 +1,13 @@
+2025-06-02 22:23:26,905 - INFO - ================================================================================
+2025-06-02 22:23:26,905 - INFO - ANEMLL SERVER v2 MONITOR WITH AUTO-RESTART & RSS MEMORY TRACKING
+2025-06-02 22:23:26,905 - INFO - ================================================================================
+2025-06-02 22:23:26,905 - INFO - Monitoring process: anemll-server.py
+2025-06-02 22:23:26,905 - INFO - Max restarts: 50
+2025-06-02 22:23:26,905 - INFO - Restart delay: 3.0s
+2025-06-02 22:23:26,905 - INFO - Enhanced with RSS memory logging after each completion
+2025-06-02 22:23:26,905 - INFO - Press Ctrl+C to stop monitoring
+2025-06-02 22:23:26,905 - INFO - ================================================================================
+2025-06-02 22:23:26,905 - INFO - Starting anemll-server.py (attempt 1)
+2025-06-02 22:23:26,907 - INFO - anemll-server.py started with PID: 8494
+2025-06-02 22:23:39,336 - INFO - ✅ Anemll Server v2 is ready and accepting connections
+2025-06-02 22:23:39,336 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes

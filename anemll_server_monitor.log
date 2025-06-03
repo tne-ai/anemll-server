@@ -1,0 +1,21 @@
+2025-06-02 22:04:13,898 - INFO - ================================================================================
+2025-06-02 22:04:13,899 - INFO - ANEMLL SERVER MONITOR WITH AUTO-RESTART
+2025-06-02 22:04:13,899 - INFO - ================================================================================
+2025-06-02 22:04:13,899 - INFO - Max restarts: 50
+2025-06-02 22:04:13,899 - INFO - Restart delay: 3.0s
+2025-06-02 22:04:13,899 - INFO - Press Ctrl+C to stop monitoring
+2025-06-02 22:04:13,899 - INFO - ================================================================================
+2025-06-02 22:04:13,899 - INFO - Starting anemll server (attempt 1)
+2025-06-02 22:04:13,900 - INFO - Server started with PID: 5744
+2025-06-02 22:04:16,353 - INFO - ✅ Server is ready and accepting connections
+2025-06-02 22:05:21,760 - ERROR - Server exited with unexpected code: 1
+2025-06-02 22:05:21,761 - INFO - Restarting in 3.0 seconds...
+2025-06-02 22:05:24,761 - INFO - Starting anemll server (attempt 2)
+2025-06-02 22:05:24,766 - INFO - Server started with PID: 5895
+2025-06-02 22:05:26,972 - INFO - ✅ Server is ready and accepting connections
+2025-06-02 22:07:21,080 - ERROR - Server exited with unexpected code: 1
+2025-06-02 22:07:21,080 - INFO - Restarting in 3.0 seconds...
+2025-06-02 22:07:24,085 - INFO - Starting anemll server (attempt 3)
+2025-06-02 22:07:24,088 - INFO - Server started with PID: 6295
+2025-06-02 22:07:27,474 - INFO - ✅ Server is ready and accepting connections
+2025-06-02 22:16:05,156 - INFO - Received shutdown signal, stopping monitor...
