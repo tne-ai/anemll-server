@@ -1,8 +1,8 @@
 {
   "suite_info": {
     "name": "Enhanced Segfault Test Suite with CoreML Error Classification",
-    "duration": 3.8389859199523926,
-    "timestamp": "2025-06-02T16:59:06.066747",
+    "duration": 4.7449071407318115,
+    "timestamp": "2025-06-02T18:20:44.666662",
     "overall_success": false
   },
   "test_summary": {
@@ -38,7 +38,7 @@
     {
       "test_name": "error_classification",
       "success": false,
-      "duration": 0.0017001628875732422,
+      "duration": 0.0014998912811279297,
       "errors_detected": 5,
       "classified_errors": [
         {
@@ -51,21 +51,21 @@
             "ANE Device Unavailable"
           ],
           "context": {
-            "timestamp": "2025-06-02T16:59:02.227771",
+            "timestamp": "2025-06-02T18:20:39.921764",
             "location": "unknown",
             "model_name": null,
             "operation": "model_loading",
             "system_state": {
-              "cpu_percent": 20.9,
-              "memory_percent": 58.1,
-              "available_memory": 57552125952,
-              "disk_usage": 10.9,
+              "cpu_percent": 21.4,
+              "memory_percent": 53.9,
+              "available_memory": 63354109952,
+              "disk_usage": 10.8,
               "load_average": [
-                3.9541015625,
-                4.47998046875,
-                4.98828125
+                5.35546875,
+                5.5048828125,
+                5.2421875
               ],
-              "process_count": 987
+              "process_count": 1021
             },
             "thread_info": {
               "thread_count": 1,
@@ -74,10 +74,10 @@
             },
             "memory_info": {
               "total": 137438953472,
-              "available": 57552125952,
-              "percent": 58.1,
-              "used": 60824961024,
-              "free": 1396899840
+              "available": 63354109952,
+              "percent": 53.9,
+              "used": 55012261888,
+              "free": 14171291648
             },
             "stacktrace": null,
             "previous_errors": []
@@ -98,7 +98,7 @@
           ],
           "can_auto_recover": true,
           "estimated_recovery_time": 45.0,
-          "classification_time": 0.00041866302490234375
+          "classification_time": 0.0005719661712646484
         },
         {
           "original_error": "Failed to allocate tensor memory",
@@ -110,21 +110,21 @@
             "Tensor Allocation Failure"
           ],
           "context": {
-            "timestamp": "2025-06-02T16:59:02.228247",
+            "timestamp": "2025-06-02T18:20:39.922390",
             "location": "unknown",
             "model_name": null,
             "operation": "tensor_allocation",
             "system_state": {
               "cpu_percent": 0.0,
-              "memory_percent": 58.1,
-              "available_memory": 57552125952,
-              "disk_usage": 10.9,
+              "memory_percent": 53.9,
+              "available_memory": 63354109952,
+              "disk_usage": 10.8,
               "load_average": [
-                3.9541015625,
-                4.47998046875,
-                4.98828125
+                5.35546875,
+                5.5048828125,
+                5.2421875
               ],
-              "process_count": 987
+              "process_count": 1021
             },
             "thread_info": {
               "thread_count": 1,
@@ -133,10 +133,10 @@
             },
             "memory_info": {
               "total": 137438953472,
-              "available": 57552125952,
-              "percent": 58.1,
-              "used": 60824961024,
-              "free": 1396899840
+              "available": 63354109952,
+              "percent": 53.9,
+              "used": 55012261888,
+              "free": 14171291648
             },
             "stacktrace": null,
             "previous_errors": []
@@ -157,7 +157,7 @@
           ],
           "can_auto_recover": true,
           "estimated_recovery_time": 45.0,
-          "classification_time": 0.00019097328186035156
+          "classification_time": 0.00020599365234375
         },
         {
           "original_error": "CoreML model compilation failed",
@@ -169,21 +169,21 @@
             "CoreML Framework Error"
           ],
           "context": {
-            "timestamp": "2025-06-02T16:59:02.228477",
+            "timestamp": "2025-06-02T18:20:39.922632",
             "location": "unknown",
             "model_name": null,
             "operation": "model_compilation",
             "system_state": {
               "cpu_percent": 0.0,
-              "memory_percent": 58.1,
-              "available_memory": 57552125952,
-              "disk_usage": 10.9,
+              "memory_percent": 53.9,
+              "available_memory": 63354109952,
+              "disk_usage": 10.8,
               "load_average": [
-                3.9541015625,
-                4.47998046875,
-                4.98828125
+                5.35546875,
+                5.5048828125,
+                5.2421875
               ],
-              "process_count": 987
+              "process_count": 1021
             },
             "thread_info": {
               "thread_count": 1,
@@ -192,10 +192,10 @@
             },
             "memory_info": {
               "total": 137438953472,
-              "available": 57552125952,
-              "percent": 58.1,
-              "used": 60824961024,
-              "free": 1396899840
+              "available": 63354109952,
+              "percent": 53.9,
+              "used": 55012261888,
+              "free": 14171291648
             },
             "stacktrace": null,
             "previous_errors": []
@@ -216,7 +216,7 @@
           ],
           "can_auto_recover": true,
           "estimated_recovery_time": 45.0,
-          "classification_time": 0.0002532005310058594
+          "classification_time": 0.00017976760864257812
         },
         {
           "original_error": "Too many open files",
@@ -228,21 +228,21 @@
             "System Resource Exhaustion"
           ],
           "context": {
-            "timestamp": "2025-06-02T16:59:02.228795",
+            "timestamp": "2025-06-02T18:20:39.922843",
             "location": "unknown",
             "model_name": null,
             "operation": "file_operations",
             "system_state": {
               "cpu_percent": 0.0,
-              "memory_percent": 58.1,
-              "available_memory": 57552125952,
-              "disk_usage": 10.9,
+              "memory_percent": 53.9,
+              "available_memory": 63354109952,
+              "disk_usage": 10.8,
               "load_average": [
-                3.9541015625,
-                4.47998046875,
-                4.98828125
+                5.35546875,
+                5.5048828125,
+                5.2421875
               ],
-              "process_count": 987
+              "process_count": 1021
             },
             "thread_info": {
               "thread_count": 1,
@@ -251,10 +251,10 @@
             },
             "memory_info": {
               "total": 137438953472,
-              "available": 57552125952,
-              "percent": 58.1,
-              "used": 60824961024,
-              "free": 1396899840
+              "available": 63354109952,
+              "percent": 53.9,
+              "used": 55012261888,
+              "free": 14171291648
             },
             "stacktrace": null,
             "previous_errors": []
@@ -275,7 +275,7 @@
           ],
           "can_auto_recover": true,
           "estimated_recovery_time": 20.0,
-          "classification_time": 0.00029397010803222656
+          "classification_time": 0.0001728534698486328
         },
         {
           "original_error": "Invalid model format",
@@ -287,21 +287,21 @@
             "Invalid Model Format"
           ],
           "context": {
-            "timestamp": "2025-06-02T16:59:02.229158",
+            "timestamp": "2025-06-02T18:20:39.923046",
             "location": "unknown",
             "model_name": null,
             "operation": "model_validation",
             "system_state": {
               "cpu_percent": 0.0,
-              "memory_percent": 58.1,
-              "available_memory": 57552125952,
-              "disk_usage": 10.9,
+              "memory_percent": 53.9,
+              "available_memory": 63354109952,
+              "disk_usage": 10.8,
               "load_average": [
-                3.9541015625,
-                4.47998046875,
-                4.98828125
+                5.35546875,
+                5.5048828125,
+                5.2421875
               ],
-              "process_count": 987
+              "process_count": 1021
             },
             "thread_info": {
               "thread_count": 1,
@@ -310,10 +310,10 @@
             },
             "memory_info": {
               "total": 137438953472,
-              "available": 57552125952,
-              "percent": 58.1,
-              "used": 60824961024,
-              "free": 1396899840
+              "available": 63354109952,
+              "percent": 53.9,
+              "used": 55012261888,
+              "free": 14171291648
             },
             "stacktrace": null,
             "previous_errors": []
@@ -333,20 +333,20 @@
           ],
           "can_auto_recover": true,
           "estimated_recovery_time": 360.0,
-          "classification_time": 0.00025582313537597656
+          "classification_time": 0.000171661376953125
         }
       ],
       "recovery_attempts": 0,
       "successful_recoveries": 0,
       "performance_metrics": {
-        "classification_time_avg": 0.00034003257751464845
+        "classification_time_avg": 0.00029997825622558595
       },
-      "timestamp": "2025-06-02 16:59:02.229559"
+      "timestamp": "2025-06-02 18:20:39.923335"
     },
     {
       "test_name": "enhanced_recovery",
       "success": true,
-      "duration": 3.8331308364868164,
+      "duration": 4.739607095718384,
       "errors_detected": 0,
       "classified_errors": [],
       "recovery_attempts": 0,
@@ -354,12 +354,12 @@
       "performance_metrics": {
         "recovery_success_rate": 0.0
       },
-      "timestamp": "2025-06-02 16:59:06.062737"
+      "timestamp": "2025-06-02 18:20:44.662980"
     },
     {
       "test_name": "pattern_recognition",
       "success": true,
-      "duration": 0.001893758773803711,
+      "duration": 0.0018498897552490234,
       "errors_detected": 5,
       "classified_errors": [],
       "recovery_attempts": 0,
@@ -369,23 +369,23 @@
         "correct_classifications": 5,
         "total_test_cases": 5
       },
-      "timestamp": "2025-06-02 16:59:06.065694"
+      "timestamp": "2025-06-02 18:20:44.665884"
     },
     {
       "test_name": "auto_recovery_performance",
       "success": false,
-      "duration": 0.0009808540344238281,
+      "duration": 0.0007078647613525391,
       "errors_detected": 3,
       "classified_errors": [],
       "recovery_attempts": 3,
       "successful_recoveries": 0,
       "performance_metrics": {
         "recovery_success_rate": 0.0,
-        "avg_recovery_time": 5.165735880533854e-05,
-        "max_recovery_time": 9.083747863769531e-05,
-        "min_recovery_time": 2.4080276489257812e-05
+        "avg_recovery_time": 2.7259190877278645e-05,
+        "max_recovery_time": 3.0040740966796875e-05,
+        "min_recovery_time": 2.193450927734375e-05
       },
-      "timestamp": "2025-06-02 16:59:06.066713"
+      "timestamp": "2025-06-02 18:20:44.666633"
     }
   ],
   "classified_errors": [],

@@ -6,11 +6,10 @@ PORT ?= 8400
 help: $(MAKEFILE_LIST)
 	@sed -n 's/^##//p' $(MAKEFILE_LIST)
 
-## install: create uv environment and add requirements
+## install: create uv environment and add requirements from pyproject.toml
 .PHONY: install
 install:
-	uv pip install -r requirements.txt
-	huggingface-cli 
+	uv pip install .
 
 MODEL_DIR ?= ./models
 MODELS ?= anemll-DeepSeekR1-8B-ctx1024_0.2.0 \

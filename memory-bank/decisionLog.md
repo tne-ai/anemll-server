@@ -81,3 +81,42 @@ This file records architectural and implementation decisions using a list format
 * **Stability Improvement**: Crash frequency reduced significantly but not eliminated
 * **Testing Framework**: Enhanced with CoreML error classification and automated recovery validation
 * **Next Steps**: Implement ANE health monitoring, request throttling, and CPU fallback mechanisms
+## Decision: Convert to uv for Python Package Control
+
+[2025-06-02 17:07:15] - Migrated dependency management from requirements.txt to pyproject.toml with uv integration
+
+## Rationale
+
+* **Modern Python Standards**: pyproject.toml is the modern standard for Python project configuration
+* **Single Source of Truth**: Consolidates project metadata and dependencies in one file
+* **Better Dependency Resolution**: uv provides faster and more reliable dependency resolution
+* **Lockfile Management**: uv.lock provides deterministic builds and better reproducibility
+* **Toolchain Consistency**: Aligns with modern Python packaging best practices
+
+## Implementation Details
+
+* Moved all dependencies from requirements.txt to pyproject.toml [project.dependencies] section
+* Updated Makefile install target to use `uv pip install .` instead of `uv pip install -r requirements.txt`
+* Preserved existing dependency versions to maintain compatibility
+* requirements.txt can be removed after testing confirms the new setup works correctly
+* uv.lock should be regenerated with `uv lock` command to reflect new dependency structure
+[2025-01-02 17:44:56] - **Model Memory Pre-Check Decision**: Implement predictive memory checking before model loading using linear scaling based on model parameters. Requirements: 1B models need 300MB free memory, 8B models need 1GB, with linear scaling between sizes. This prevents crashes by rejecting model loads that exceed available unified memory.
+[2025-01-02 17:47:23] - **Refined Memory Assessment Strategy**: Updated design to use RSS-based memory assessment instead of system-wide memory, and extract model parameters from Huggingface model config files in ./models directory rather than parsing model names. This provides more accurate ANE memory availability and reliable parameter detection.
+[2025-01-02 17:51:43] - **Simplified Memory Assessment**: Updated memory status function to return current RSS directly as available memory for models, simplifying the calculation and using RSS as the direct proxy for ANE memory availability.
+## Decision: Model Parameter Determination via Name Parsing
+
+[2025-06-02 18:05:56] - Changed model parameter determination strategy to parse model names (e.g., "1B", "8B") instead of reading `config.json` files. This is a global server change.
+
+## Rationale
+
+*   **User Directive**: This change is based on a direct user request to modify the existing behavior.
+*   **Simplified Parameter Source (for some use cases)**: Relies on a naming convention rather than external configuration files for parameter size.
+
+## Implementation Details
+
+*   Modify `anemll-server.py`:
+    *   Introduce `get_model_parameters_from_name(model_name: str) -> Optional[float]` to parse size (e.g., "XB") from the model name string using regex.
+    *   Update `can_load_model` to use `get_model_parameters_from_name` instead of `get_model_parameters_from_config`.
+    *   The `get_model_parameters_from_config` function will be deprecated/removed.
+*   **Impact**: This is a global change affecting how the server estimates memory requirements for all models. Existing tests will implicitly use this new logic.
+*   **Supersedes**: This decision supersedes the part of "[2025-01-02 17:47:23] - Refined Memory Assessment Strategy" that specified extracting parameters from Huggingface config files.

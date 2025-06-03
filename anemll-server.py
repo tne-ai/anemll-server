@@ -18,6 +18,8 @@ import logging
 import torch
 import torch.nn.functional as F
 import uuid
+import psutil
+import re
 
 # Import from chat_full.py
 from chat_full import (
@@ -30,6 +32,11 @@ from model_registry import ModelRegistry
 from model_manager import ModelManager
 from model_info import LoadedModel
 from config import get_config
+
+# Import CoreML error classification components
+from coreml_error_classifier import get_classifier, classify_error
+from coreml_wrapper import CoreMLMonitor, handle_coreml_error
+from error_patterns import ErrorCategory, ErrorSeverity
 
 # Configure logging
 config = get_config()
@@ -54,6 +61,252 @@ app.add_middleware(
 # Global model management
 model_registry: Optional[ModelRegistry] = None
 model_manager: Optional[ModelManager] = None
+
+# Global CoreML error classifier
+coreml_classifier = None
+
+def check_memory_availability(min_memory_mb: int = 400) -> Dict[str, any]:
+    """
+    Check if sufficient memory is available before loading a model.
+    
+    Args:
+        min_memory_mb: Minimum required memory in MB (default 400MB)
+        
+    Returns:
+        Dict with availability status and memory info
+    """
+    try:
+        vm = psutil.virtual_memory()
+        available_mb = vm.available / (1024 * 1024)  # Convert bytes to MB
+        
+        memory_info = {
+            "available_mb": round(available_mb, 2),
+            "available_bytes": vm.available,
+            "total_mb": round(vm.total / (1024 * 1024), 2),
+            "used_percent": vm.percent,
+            "sufficient": available_mb >= min_memory_mb,
+            "required_mb": min_memory_mb
+        }
+        
+        logger.info(f"Memory check: {available_mb:.2f}MB available, {min_memory_mb}MB required")
+        
+        return memory_info
+        
+    except Exception as e:
+        logger.error(f"Error checking memory availability: {str(e)}")
+        return {
+            "available_mb": 0,
+            "available_bytes": 0,
+            "total_mb": 0,
+            "used_percent": 0,
+            "sufficient": False,
+            "required_mb": min_memory_mb,
+            "error": str(e)
+        }
+
+def get_server_memory_status():
+    """Get current RSS as available memory for models (same calculation as monitor_server_health)"""
+    try:
+        # Same calculation as "Server health - Memory: X MB"
+        current_process = psutil.Process(os.getpid())
+        memory_info = current_process.memory_info()
+        current_rss_mb = memory_info.rss / 1024 / 1024
+        
+        logger.debug(f"Current server RSS: {current_rss_mb:.1f} MB")
+        return current_rss_mb
+        
+    except Exception as e:
+        logger.error(f"Error getting server memory status: {str(e)}")
+        return 0
+
+def get_model_parameters_from_name(model_name: str) -> Optional[float]:
+    """Get model parameters by parsing the model name for patterns like '1B', '8B', '500M', etc."""
+    try:
+        # Look for patterns like "1B", "8B" (billion parameters) or "500M" (million parameters/MB)
+        # Pattern matches digits followed by B or M (case insensitive)
+        pattern = r'(\d+)(B|M)'
+        matches = re.findall(pattern, model_name, re.IGNORECASE)
+        
+        if matches:
+            # Take the first match (in case there are multiple, which should be rare)
+            value_str, unit = matches[0]
+            value = float(value_str)
+            unit = unit.upper()
+            
+            if unit == 'B':
+                # Direct billion parameter count
+                params_billions = value
+                logger.info(f"Parsed {params_billions}B parameters from model name: {model_name}")
+            elif unit == 'M':
+                # Convert millions to billions (M could be million parameters or MB memory)
+                # Treat as millions of parameters: 1000M = 1B
+                params_billions = value / 1000.0
+                logger.info(f"Parsed {value}M → {params_billions:.3f}B parameters from model name: {model_name}")
+            else:
+                logger.warning(f"Unknown unit '{unit}' in model name: {model_name}")
+                return None
+                
+            return params_billions
+        else:
+            logger.warning(f"Could not parse parameter size from model name: {model_name}")
+            return None
+            
+    except Exception as e:
+        logger.error(f"Error parsing model name {model_name}: {str(e)}")
+        return None
+
+def get_model_parameters_from_config(model_name: str) -> Optional[float]:
+    """
+    DEPRECATED: Get model parameters from Huggingface config file
+    
+    This function is no longer used. The server now uses get_model_parameters_from_name()
+    to parse parameter size directly from model names (e.g., "1B", "8B").
+    """
+    try:
+        config_path = Path(f"./models/{model_name}/config.json")
+        
+        if not config_path.exists():
+            logger.warning(f"Config file not found for model {model_name}: {config_path}")
+            return None
+            
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        
+        # Try different parameter fields
+        if 'num_parameters' in config:
+            params = config['num_parameters']
+        elif 'n_params' in config:
+            params = config['n_params']
+        elif 'n_parameters' in config:
+            params = config['n_parameters']
+        else:
+            # Try to estimate from architecture
+            if 'hidden_size' in config and 'num_hidden_layers' in config:
+                hidden_size = config['hidden_size']
+                num_layers = config['num_hidden_layers']
+                vocab_size = config.get('vocab_size', 32000)
+                
+                # Rough estimation: embedding + transformer layers + output head
+                # This is a simplified calculation
+                estimated_params = (
+                    vocab_size * hidden_size +  # input embedding
+                    num_layers * (hidden_size * hidden_size * 4 + hidden_size * 2) +  # transformer layers (simplified)
+                    vocab_size * hidden_size  # output head
+                )
+                params = estimated_params
+                logger.info(f"Estimated {estimated_params:,} parameters for {model_name}")
+            else:
+                logger.warning(f"Cannot determine parameter count for model {model_name}")
+                return None
+        
+        # Convert to billions
+        params_billions = params / 1_000_000_000
+        logger.info(f"Model {model_name} has {params_billions:.1f}B parameters")
+        return params_billions
+        
+    except Exception as e:
+        logger.error(f"Error reading config for model {model_name}: {str(e)}")
+        return None
+
+def can_load_model(model_name: str) -> tuple[bool, str]:
+    """Check if model can be loaded based on memory requirements"""
+    try:
+        # Get model parameters by parsing model name
+        model_params_billions = get_model_parameters_from_name(model_name)
+        
+        if model_params_billions is None:
+            # Fallback: assume it's a medium model if we can't determine size
+            logger.warning(f"Cannot determine model size for {model_name}, assuming 3B parameters")
+            model_params_billions = 3.0
+        
+        # Calculate required memory using empirical formula
+        # 300MB for 1B + 100MB for each additional billion parameters
+        required_memory_mb = 300 + max(0, (model_params_billions - 1) * 100)
+        
+        # Get available memory using same RSS calculation as monitor_server_health
+        available_memory_mb = get_server_memory_status()
+        
+        if available_memory_mb < required_memory_mb:
+            error_msg = f"Model requires {required_memory_mb:.0f}MB, only {available_memory_mb:.1f}MB available"
+            logger.warning(f"Memory check failed for {model_name}: {error_msg}")
+            return False, error_msg
+        
+        logger.info(f"Memory check passed for {model_name}: {available_memory_mb:.1f}MB available for {required_memory_mb:.0f}MB required")
+        return True, f"Sufficient memory available"
+        
+    except Exception as e:
+        error_msg = f"Error checking model memory requirements: {str(e)}"
+        logger.error(error_msg)
+        return False, error_msg
+
+def log_error_details(error: Exception, operation: str, model_name: str = None):
+    """
+    Log detailed error information using CoreML error classifier.
+    
+    Args:
+        error: The exception that occurred
+        operation: The operation being performed when error occurred
+        model_name: Name of the model involved (if applicable)
+    """
+    try:
+        if coreml_classifier is None:
+            logger.error(f"Error in {operation}: {str(error)} (classifier not available)")
+            return
+            
+        # Build context for error classification
+        context = {
+            "operation": operation,
+            "model_name": model_name,
+            "location": "anemll-server.py",
+            "server_component": True
+        }
+        
+        # Classify the error
+        classified_error = coreml_classifier.classify_error(error, context)
+        
+        # Log comprehensive error information
+        logger.error("=" * 80)
+        logger.error("COREML ERROR CLASSIFICATION REPORT")
+        logger.error("=" * 80)
+        logger.error(f"Operation: {operation}")
+        logger.error(f"Model: {model_name or 'Unknown'}")
+        logger.error(f"Category: {classified_error.category.value}")
+        logger.error(f"Severity: {classified_error.severity.value}")
+        logger.error(f"Confidence: {classified_error.confidence:.2f}")
+        logger.error(f"Error: {classified_error.original_error}")
+        logger.error(f"Description: {classified_error.description}")
+        
+        if classified_error.potential_causes:
+            logger.error("Potential Causes:")
+            for cause in classified_error.potential_causes:
+                logger.error(f"  - {cause}")
+        
+        if classified_error.recovery_steps:
+            logger.error("Recovery Steps:")
+            for step in classified_error.recovery_steps:
+                logger.error(f"  - {step}")
+        
+        # Log memory information
+        memory_info = check_memory_availability()
+        logger.error(f"Memory Status: {memory_info['available_mb']:.2f}MB available")
+        
+        logger.error("=" * 80)
+        
+        # Attempt auto-recovery for critical errors
+        if (classified_error.severity in [ErrorSeverity.CRITICAL, ErrorSeverity.HIGH] and
+            classified_error.can_auto_recover):
+            
+            logger.info(f"Attempting auto-recovery for {classified_error.category.value} error")
+            recovery_result = coreml_classifier.attempt_auto_recovery(classified_error, context)
+            
+            if recovery_result.get("success"):
+                logger.info("✅ Auto-recovery successful")
+            else:
+                logger.error(f"❌ Auto-recovery failed: {recovery_result.get('error')}")
+        
+    except Exception as classification_error:
+        logger.error(f"Error during error classification: {str(classification_error)}")
+        logger.error(f"Original error in {operation}: {str(error)}")
 
 # Pydantic models for API
 class Message(BaseModel):
@@ -188,6 +441,12 @@ server with the --truncate flag:
                 error_msg = str(e)
                 logger.error(f"CoreML model error: {error_msg}")
                 
+                # Use CoreML error classifier for detailed error analysis
+                try:
+                    log_error_details(e, "model_inference", self.loaded_model.info.name)
+                except Exception as classification_error:
+                    logger.error(f"Error during error classification: {str(classification_error)}")
+                
                 if "Shape" in error_msg and "was not in enumerated set of allowed shapes" in error_msg:
                     logger.error(f"The model requires specific input shapes. Please ensure the batch_size in meta.yaml ({self.batch_size}) matches what the model expects.")
                     
@@ -273,6 +532,13 @@ server with the --truncate flag:
             logger.error(f"Error in token generation: {str(e)}")
             import traceback
             traceback.print_exc()
+            
+            # Use CoreML error classifier for detailed error analysis
+            try:
+                log_error_details(e, "token_generation", self.loaded_model.info.name)
+            except Exception as classification_error:
+                logger.error(f"Error during error classification: {str(classification_error)}")
+            
             with self.queue_lock:
                 self.token_queue.put(None)  # Signal end of generation
 
@@ -316,8 +582,19 @@ server with the --truncate flag:
 async def stream_chat_completion(request: ChatCompletionRequest):
     """Stream chat completion response."""
     try:
-        # Get the requested model
-        loaded_model = await model_manager.get_model(request.model)
+        # Check model-specific memory requirements before loading
+        can_load, memory_msg = can_load_model(request.model)
+        if not can_load:
+            error_msg = f"Cannot load model '{request.model}': {memory_msg}"
+            logger.error(error_msg)
+            raise HTTPException(
+                status_code=503,
+                detail=error_msg
+            )
+        
+        # Get the requested model with CoreML monitoring
+        with CoreMLMonitor("model_loading", request.model) as monitor:
+            loaded_model = await model_manager.get_model(request.model)
         
         generator = StreamingTokenGenerator(
             loaded_model=loaded_model,
@@ -326,6 +603,7 @@ async def stream_chat_completion(request: ChatCompletionRequest):
         )
     except ValueError as e:
         # Model not found in registry
+        log_error_details(e, "model_retrieval", request.model)
         available_models = model_registry.list_models()
         raise HTTPException(
             status_code=404,
@@ -333,9 +611,17 @@ async def stream_chat_completion(request: ChatCompletionRequest):
         )
     except RuntimeError as e:
         # Model loading failed
+        log_error_details(e, "model_loading", request.model)
         raise HTTPException(
             status_code=500,
             detail=f"Failed to load model '{request.model}': {str(e)}"
+        )
+    except Exception as e:
+        # Any other error during model loading
+        log_error_details(e, "model_loading", request.model)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error loading model '{request.model}': {str(e)}"
         )
     
     generator.start_generation()
@@ -399,8 +685,19 @@ async def stream_chat_completion(request: ChatCompletionRequest):
 async def generate_chat_completion(request: ChatCompletionRequest):
     """Generate non-streaming chat completion response."""
     try:
-        # Get the requested model
-        loaded_model = await model_manager.get_model(request.model)
+        # Check model-specific memory requirements before loading
+        can_load, memory_msg = can_load_model(request.model)
+        if not can_load:
+            error_msg = f"Cannot load model '{request.model}': {memory_msg}"
+            logger.error(error_msg)
+            raise HTTPException(
+                status_code=503,
+                detail=error_msg
+            )
+        
+        # Get the requested model with CoreML monitoring
+        with CoreMLMonitor("model_loading", request.model) as monitor:
+            loaded_model = await model_manager.get_model(request.model)
         
         generator = StreamingTokenGenerator(
             loaded_model=loaded_model,
@@ -409,6 +706,7 @@ async def generate_chat_completion(request: ChatCompletionRequest):
         )
     except ValueError as e:
         # Model not found in registry
+        log_error_details(e, "model_retrieval", request.model)
         available_models = model_registry.list_models()
         raise HTTPException(
             status_code=404,
@@ -416,9 +714,17 @@ async def generate_chat_completion(request: ChatCompletionRequest):
         )
     except RuntimeError as e:
         # Model loading failed
+        log_error_details(e, "model_loading", request.model)
         raise HTTPException(
             status_code=500,
             detail=f"Failed to load model '{request.model}': {str(e)}"
+        )
+    except Exception as e:
+        # Any other error during model loading
+        log_error_details(e, "model_loading", request.model)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error loading model '{request.model}': {str(e)}"
         )
     
     try:
@@ -537,11 +843,19 @@ async def refresh_models():
 
 def initialize_model_system():
     """Initialize the dynamic model loading system."""
-    global model_registry, model_manager
+    global model_registry, model_manager, coreml_classifier
     
     logger.info("Initializing dynamic model loading system")
     
     try:
+        # Initialize CoreML error classifier
+        try:
+            coreml_classifier = get_classifier()
+            logger.info("CoreML error classifier initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize CoreML error classifier: {str(e)}")
+            coreml_classifier = None
+        
         # Initialize model registry
         model_registry = ModelRegistry(config.model_dir)
         logger.info(f"Model registry initialized with {len(model_registry)} models")

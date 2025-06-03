@@ -4,4 +4,15 @@ readme = "README.md"
 requires-python = ">=3.12"
 name = "anemll-server"
 version = "0.1.0"
-dependencies = []
+dependencies = [
+    "fastapi>=0.115.11",
+    "uvicorn>=0.34.0",
+    "pydantic>=2.10.6",
+    "torch>=2.6.0",
+    "numpy>=2.0.2",
+    "transformers>=4.49.0",
+    "coremltools>=8.2",
+    "PyYAML>=6.0.2",
+    "python-multipart>=0.0.20",
+    "aiohttp>=3.11.13"
+]
