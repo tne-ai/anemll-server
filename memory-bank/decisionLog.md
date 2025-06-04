@@ -138,3 +138,16 @@ This file records architectural and implementation decisions using a list format
 * **Comprehensive Coverage**: Applied same pattern to all error conditions (memory insufficient, model not found, loading failed)
 * **Diagnostic Logging**: Added clear logging to distinguish between memory checks and graceful degradation
 * **Error Message Format**: Consistent "❌ [error description]. Please try a smaller model or free up memory." format
+[2025-06-04 13:55:00] - **ASYNC GENERATOR SYNTAX FIX**
+
+## Decision
+Fixed critical Python syntax error in `stream_chat_completion()` async generator function by replacing `return <generator>()` statements with proper async generator delegation pattern.
+
+## Rationale 
+Python async generators (functions with `async def` and `yield`) cannot use `return` with values - only `yield` statements and `return` without values are allowed. The function was attempting to return generator objects directly, violating this syntax rule.
+
+## Implementation Details
+- Replaced 4 instances of `return <generator>()` with `async for chunk in <generator>(): yield chunk; return`
+- Fixed lines 610, 634, 644, and 654 in anemll-server-core.py
+- Maintained functional behavior while correcting syntax
+- Verified fix with `python -m py_compile` syntax check

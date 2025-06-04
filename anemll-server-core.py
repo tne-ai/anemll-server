@@ -607,7 +607,9 @@ async def stream_chat_completion(request: ChatCompletionRequest):
             # End the stream
             yield "data: [DONE]\n\n"
         
-        return error_stream()
+        async for chunk in error_stream():
+            yield chunk
+        return
     
     try:
         
@@ -631,7 +633,9 @@ async def stream_chat_completion(request: ChatCompletionRequest):
             yield f"data: {json.dumps({'id': completion_id, 'object': 'chat.completion.chunk', 'created': created_time, 'model': request.model, 'choices': [{'index': 0, 'delta': {'content': f'❌ Model \'{request.model}\' not found. Available models: {available_models}'}, 'finish_reason': 'error'}]})}\n\n"
             yield "data: [DONE]\n\n"
         
-        return model_not_found_stream()
+        async for chunk in model_not_found_stream():
+            yield chunk
+        return
     except RuntimeError as e:
         # Model loading failed
         log_error_details(e, "model_loading", request.model)
@@ -641,7 +645,9 @@ async def stream_chat_completion(request: ChatCompletionRequest):
             yield f"data: {json.dumps({'id': completion_id, 'object': 'chat.completion.chunk', 'created': created_time, 'model': request.model, 'choices': [{'index': 0, 'delta': {'content': f'❌ Failed to load model \'{request.model}\': {str(e)}'}, 'finish_reason': 'error'}]})}\n\n"
             yield "data: [DONE]\n\n"
         
-        return model_load_failed_stream()
+        async for chunk in model_load_failed_stream():
+            yield chunk
+        return
     except Exception as e:
         # Any other error during model loading
         log_error_details(e, "model_loading", request.model)
@@ -651,7 +657,9 @@ async def stream_chat_completion(request: ChatCompletionRequest):
             yield f"data: {json.dumps({'id': completion_id, 'object': 'chat.completion.chunk', 'created': created_time, 'model': request.model, 'choices': [{'index': 0, 'delta': {'content': f'❌ Error loading model \'{request.model}\': {str(e)}'}, 'finish_reason': 'error'}]})}\n\n"
             yield "data: [DONE]\n\n"
         
-        return generic_error_stream()
+        async for chunk in generic_error_stream():
+            yield chunk
+        return
     
     generator.start_generation()
     

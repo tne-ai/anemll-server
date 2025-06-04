@@ -127,3 +127,4 @@ This file tracks the project's progress using a task list format.
   - **Architecture Note**: anemll-server.py is the master process that monitors anemll-server-core.py and restarts it as needed for crash recovery
   - **Process Hierarchy**: anemll-server.py (master monitor) → anemll-server-core.py (core API server)
   - All file renames now complete and properly documented
+[2025-06-04 13:55:00] - ✅ CRITICAL SYNTAX FIX: Resolved Python async generator syntax error in anemll-server-core.py line 610 - replaced `return error_stream()` with proper async generator delegation using `async for ... yield` pattern. All four instances fixed (lines 610, 634, 644, 654).
