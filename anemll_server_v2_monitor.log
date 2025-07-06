@@ -292,3 +292,522 @@
 2025-06-11 18:06:44,713 - INFO - anemll-server-core.py started with PID: 61779
 2025-06-11 18:07:02,852 - INFO - ✅ Anemll Server v2 is ready and accepting connections
 2025-06-11 18:07:02,852 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes
+2025-06-16 19:59:05,908 - INFO - Received shutdown signal, stopping Anemll Server v2 monitor...
+2025-06-19 06:23:45,493 - INFO - ================================================================================
+2025-06-19 06:23:45,493 - INFO - ANEMLL SERVER v2 MONITOR WITH AUTO-RESTART & RSS MEMORY TRACKING
+2025-06-19 06:23:45,493 - INFO - ================================================================================
+2025-06-19 06:23:45,493 - INFO - Monitoring process: anemll-server-core.py
+2025-06-19 06:23:45,493 - INFO - Max restarts: 50
+2025-06-19 06:23:45,493 - INFO - Restart delay: 3.0s
+2025-06-19 06:23:45,494 - INFO - Enhanced with RSS memory logging after each completion
+2025-06-19 06:23:45,494 - INFO - Press Ctrl+C to stop monitoring
+2025-06-19 06:23:45,494 - INFO - ================================================================================
+2025-06-19 06:23:45,494 - INFO - Starting anemll-server-core.py (attempt 1)
+2025-06-19 06:23:45,495 - INFO - anemll-server-core.py started with PID: 61726
+2025-06-19 06:24:10,563 - INFO - ✅ Anemll Server v2 is ready and accepting connections
+2025-06-19 06:24:10,564 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes
+2025-06-20 18:11:38,720 - INFO - Received shutdown signal, stopping Anemll Server v2 monitor...
+2025-06-20 18:16:38,804 - INFO - ================================================================================
+2025-06-20 18:16:38,804 - INFO - ANEMLL SERVER v2 MONITOR WITH AUTO-RESTART & RSS MEMORY TRACKING
+2025-06-20 18:16:38,804 - INFO - ================================================================================
+2025-06-20 18:16:38,804 - INFO - Monitoring process: anemll-server-core.py
+2025-06-20 18:16:38,804 - INFO - Max restarts: 50
+2025-06-20 18:16:38,804 - INFO - Restart delay: 3.0s
+2025-06-20 18:16:38,804 - INFO - Enhanced with RSS memory logging after each completion
+2025-06-20 18:16:38,804 - INFO - Press Ctrl+C to stop monitoring
+2025-06-20 18:16:38,804 - INFO - ================================================================================
+2025-06-20 18:16:38,804 - INFO - Starting anemll-server-core.py (attempt 1)
+2025-06-20 18:16:38,806 - INFO - anemll-server-core.py started with PID: 4440
+2025-06-20 18:17:01,246 - INFO - ✅ Anemll Server v2 is ready and accepting connections
+2025-06-20 18:17:01,247 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes
+2025-06-21 13:06:40,493 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:06:43,497 - INFO - Starting anemll-server-core.py (attempt 2)
+2025-06-21 13:06:43,503 - INFO - anemll-server-core.py started with PID: 86096
+2025-06-21 13:06:50,581 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:06:53,583 - INFO - Starting anemll-server-core.py (attempt 3)
+2025-06-21 13:06:53,591 - INFO - anemll-server-core.py started with PID: 86116
+2025-06-21 13:06:54,370 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:06:57,372 - INFO - Starting anemll-server-core.py (attempt 4)
+2025-06-21 13:06:57,377 - INFO - anemll-server-core.py started with PID: 86121
+2025-06-21 13:06:58,022 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:01,028 - INFO - Starting anemll-server-core.py (attempt 5)
+2025-06-21 13:07:01,032 - INFO - anemll-server-core.py started with PID: 86125
+2025-06-21 13:07:01,685 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:04,687 - INFO - Starting anemll-server-core.py (attempt 6)
+2025-06-21 13:07:04,688 - INFO - anemll-server-core.py started with PID: 86150
+2025-06-21 13:07:05,300 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:08,303 - INFO - Starting anemll-server-core.py (attempt 7)
+2025-06-21 13:07:08,310 - INFO - anemll-server-core.py started with PID: 86153
+2025-06-21 13:07:08,982 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:11,986 - INFO - Starting anemll-server-core.py (attempt 8)
+2025-06-21 13:07:11,992 - INFO - anemll-server-core.py started with PID: 86157
+2025-06-21 13:07:12,667 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:15,670 - INFO - Starting anemll-server-core.py (attempt 9)
+2025-06-21 13:07:15,674 - INFO - anemll-server-core.py started with PID: 86160
+2025-06-21 13:07:16,350 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:19,355 - INFO - Starting anemll-server-core.py (attempt 10)
+2025-06-21 13:07:19,359 - INFO - anemll-server-core.py started with PID: 86161
+2025-06-21 13:07:20,045 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:23,048 - INFO - Starting anemll-server-core.py (attempt 11)
+2025-06-21 13:07:23,055 - INFO - anemll-server-core.py started with PID: 86167
+2025-06-21 13:07:23,727 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:26,732 - INFO - Starting anemll-server-core.py (attempt 12)
+2025-06-21 13:07:26,738 - INFO - anemll-server-core.py started with PID: 86168
+2025-06-21 13:07:27,396 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:30,401 - INFO - Starting anemll-server-core.py (attempt 13)
+2025-06-21 13:07:30,404 - INFO - anemll-server-core.py started with PID: 86169
+2025-06-21 13:07:31,067 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:34,072 - INFO - Starting anemll-server-core.py (attempt 14)
+2025-06-21 13:07:34,079 - INFO - anemll-server-core.py started with PID: 86175
+2025-06-21 13:07:34,725 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:37,730 - INFO - Starting anemll-server-core.py (attempt 15)
+2025-06-21 13:07:37,735 - INFO - anemll-server-core.py started with PID: 86176
+2025-06-21 13:07:38,383 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:41,389 - INFO - Starting anemll-server-core.py (attempt 16)
+2025-06-21 13:07:41,399 - INFO - anemll-server-core.py started with PID: 86185
+2025-06-21 13:07:42,118 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:45,124 - INFO - Starting anemll-server-core.py (attempt 17)
+2025-06-21 13:07:45,129 - INFO - anemll-server-core.py started with PID: 86190
+2025-06-21 13:07:45,792 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:48,797 - INFO - Starting anemll-server-core.py (attempt 18)
+2025-06-21 13:07:48,801 - INFO - anemll-server-core.py started with PID: 86191
+2025-06-21 13:07:49,514 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:52,519 - INFO - Starting anemll-server-core.py (attempt 19)
+2025-06-21 13:07:52,524 - INFO - anemll-server-core.py started with PID: 86195
+2025-06-21 13:07:53,389 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:07:56,395 - INFO - Starting anemll-server-core.py (attempt 20)
+2025-06-21 13:07:56,401 - INFO - anemll-server-core.py started with PID: 86196
+2025-06-21 13:07:57,102 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:00,106 - INFO - Starting anemll-server-core.py (attempt 21)
+2025-06-21 13:08:00,109 - INFO - anemll-server-core.py started with PID: 86197
+2025-06-21 13:08:00,843 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:03,844 - INFO - Starting anemll-server-core.py (attempt 22)
+2025-06-21 13:08:03,850 - INFO - anemll-server-core.py started with PID: 86203
+2025-06-21 13:08:04,589 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:07,595 - INFO - Starting anemll-server-core.py (attempt 23)
+2025-06-21 13:08:07,610 - INFO - anemll-server-core.py started with PID: 86204
+2025-06-21 13:08:08,503 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:11,508 - INFO - Starting anemll-server-core.py (attempt 24)
+2025-06-21 13:08:11,515 - INFO - anemll-server-core.py started with PID: 86205
+2025-06-21 13:08:12,301 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:15,306 - INFO - Starting anemll-server-core.py (attempt 25)
+2025-06-21 13:08:15,312 - INFO - anemll-server-core.py started with PID: 86209
+2025-06-21 13:08:16,149 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:19,155 - INFO - Starting anemll-server-core.py (attempt 26)
+2025-06-21 13:08:19,160 - INFO - anemll-server-core.py started with PID: 86210
+2025-06-21 13:08:19,929 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:22,934 - INFO - Starting anemll-server-core.py (attempt 27)
+2025-06-21 13:08:22,943 - INFO - anemll-server-core.py started with PID: 86214
+2025-06-21 13:08:23,762 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:26,764 - INFO - Starting anemll-server-core.py (attempt 28)
+2025-06-21 13:08:26,773 - INFO - anemll-server-core.py started with PID: 86215
+2025-06-21 13:08:27,490 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:30,492 - INFO - Starting anemll-server-core.py (attempt 29)
+2025-06-21 13:08:30,500 - INFO - anemll-server-core.py started with PID: 86216
+2025-06-21 13:08:31,219 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:34,224 - INFO - Starting anemll-server-core.py (attempt 30)
+2025-06-21 13:08:34,227 - INFO - anemll-server-core.py started with PID: 86220
+2025-06-21 13:08:35,032 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:38,034 - INFO - Starting anemll-server-core.py (attempt 31)
+2025-06-21 13:08:38,044 - INFO - anemll-server-core.py started with PID: 86225
+2025-06-21 13:08:38,843 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:41,848 - INFO - Starting anemll-server-core.py (attempt 32)
+2025-06-21 13:08:41,855 - INFO - anemll-server-core.py started with PID: 86227
+2025-06-21 13:08:42,635 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:45,640 - INFO - Starting anemll-server-core.py (attempt 33)
+2025-06-21 13:08:45,646 - INFO - anemll-server-core.py started with PID: 86233
+2025-06-21 13:08:46,427 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:49,428 - INFO - Starting anemll-server-core.py (attempt 34)
+2025-06-21 13:08:49,434 - INFO - anemll-server-core.py started with PID: 86238
+2025-06-21 13:08:50,241 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:53,247 - INFO - Starting anemll-server-core.py (attempt 35)
+2025-06-21 13:08:53,251 - INFO - anemll-server-core.py started with PID: 86243
+2025-06-21 13:08:54,026 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:08:57,028 - INFO - Starting anemll-server-core.py (attempt 36)
+2025-06-21 13:08:57,033 - INFO - anemll-server-core.py started with PID: 86244
+2025-06-21 13:08:57,928 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:00,933 - INFO - Starting anemll-server-core.py (attempt 37)
+2025-06-21 13:09:00,941 - INFO - anemll-server-core.py started with PID: 86245
+2025-06-21 13:09:01,745 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:04,750 - INFO - Starting anemll-server-core.py (attempt 38)
+2025-06-21 13:09:04,752 - INFO - anemll-server-core.py started with PID: 86249
+2025-06-21 13:09:05,465 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:08,467 - INFO - Starting anemll-server-core.py (attempt 39)
+2025-06-21 13:09:08,473 - INFO - anemll-server-core.py started with PID: 86253
+2025-06-21 13:09:09,118 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:12,118 - INFO - Starting anemll-server-core.py (attempt 40)
+2025-06-21 13:09:12,124 - INFO - anemll-server-core.py started with PID: 86254
+2025-06-21 13:09:12,780 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:15,786 - INFO - Starting anemll-server-core.py (attempt 41)
+2025-06-21 13:09:15,793 - INFO - anemll-server-core.py started with PID: 86258
+2025-06-21 13:09:16,453 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:19,458 - INFO - Starting anemll-server-core.py (attempt 42)
+2025-06-21 13:09:19,464 - INFO - anemll-server-core.py started with PID: 86259
+2025-06-21 13:09:20,143 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:23,148 - INFO - Starting anemll-server-core.py (attempt 43)
+2025-06-21 13:09:23,154 - INFO - anemll-server-core.py started with PID: 86264
+2025-06-21 13:09:23,807 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:26,812 - INFO - Starting anemll-server-core.py (attempt 44)
+2025-06-21 13:09:26,815 - INFO - anemll-server-core.py started with PID: 86265
+2025-06-21 13:09:27,507 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:30,507 - INFO - Starting anemll-server-core.py (attempt 45)
+2025-06-21 13:09:30,511 - INFO - anemll-server-core.py started with PID: 86289
+2025-06-21 13:09:31,200 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:34,205 - INFO - Starting anemll-server-core.py (attempt 46)
+2025-06-21 13:09:34,207 - INFO - anemll-server-core.py started with PID: 86540
+2025-06-21 13:09:34,929 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:37,934 - INFO - Starting anemll-server-core.py (attempt 47)
+2025-06-21 13:09:37,939 - INFO - anemll-server-core.py started with PID: 86546
+2025-06-21 13:09:38,677 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:41,682 - INFO - Starting anemll-server-core.py (attempt 48)
+2025-06-21 13:09:41,688 - INFO - anemll-server-core.py started with PID: 86554
+2025-06-21 13:09:42,371 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:45,374 - INFO - Starting anemll-server-core.py (attempt 49)
+2025-06-21 13:09:45,377 - INFO - anemll-server-core.py started with PID: 86574
+2025-06-21 13:09:46,239 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:49,244 - INFO - Starting anemll-server-core.py (attempt 50)
+2025-06-21 13:09:49,246 - INFO - anemll-server-core.py started with PID: 86587
+2025-06-21 13:09:50,018 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:53,023 - INFO - Starting anemll-server-core.py (attempt 51)
+2025-06-21 13:09:53,034 - INFO - anemll-server-core.py started with PID: 86608
+2025-06-21 13:09:53,784 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-21 13:09:56,789 - INFO - ================================================================================
+2025-06-21 13:09:56,790 - INFO - ANEMLL SERVER v2 MONITORING COMPLETED
+2025-06-21 13:09:56,790 - INFO - Total restarts of anemll-server-core.py: 51
+2025-06-21 13:09:56,790 - INFO - ================================================================================
+2025-06-22 20:29:10,137 - INFO - ================================================================================
+2025-06-22 20:29:10,137 - INFO - ANEMLL SERVER v2 MONITOR WITH AUTO-RESTART & RSS MEMORY TRACKING
+2025-06-22 20:29:10,137 - INFO - ================================================================================
+2025-06-22 20:29:10,137 - INFO - Monitoring process: anemll-server-core.py
+2025-06-22 20:29:10,137 - INFO - Max restarts: 50
+2025-06-22 20:29:10,137 - INFO - Restart delay: 3.0s
+2025-06-22 20:29:10,137 - INFO - Enhanced with RSS memory logging after each completion
+2025-06-22 20:29:10,137 - INFO - Press Ctrl+C to stop monitoring
+2025-06-22 20:29:10,137 - INFO - ================================================================================
+2025-06-22 20:29:10,137 - INFO - Starting anemll-server-core.py (attempt 1)
+2025-06-22 20:29:10,138 - INFO - anemll-server-core.py started with PID: 20575
+2025-06-22 20:29:25,942 - INFO - ✅ Anemll Server v2 is ready and accepting connections
+2025-06-22 20:29:25,942 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes
+2025-06-26 14:44:19,271 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:22,277 - INFO - Starting anemll-server-core.py (attempt 2)
+2025-06-26 14:44:22,288 - INFO - anemll-server-core.py started with PID: 20783
+2025-06-26 14:44:29,267 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:32,269 - INFO - Starting anemll-server-core.py (attempt 3)
+2025-06-26 14:44:32,277 - INFO - anemll-server-core.py started with PID: 20847
+2025-06-26 14:44:32,934 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:35,937 - INFO - Starting anemll-server-core.py (attempt 4)
+2025-06-26 14:44:35,944 - INFO - anemll-server-core.py started with PID: 20872
+2025-06-26 14:44:36,649 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:39,651 - INFO - Starting anemll-server-core.py (attempt 5)
+2025-06-26 14:44:39,656 - INFO - anemll-server-core.py started with PID: 20881
+2025-06-26 14:44:40,332 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:43,335 - INFO - Starting anemll-server-core.py (attempt 6)
+2025-06-26 14:44:43,340 - INFO - anemll-server-core.py started with PID: 20975
+2025-06-26 14:44:43,999 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:47,004 - INFO - Starting anemll-server-core.py (attempt 7)
+2025-06-26 14:44:47,011 - INFO - anemll-server-core.py started with PID: 21031
+2025-06-26 14:44:47,717 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:50,718 - INFO - Starting anemll-server-core.py (attempt 8)
+2025-06-26 14:44:50,720 - INFO - anemll-server-core.py started with PID: 21059
+2025-06-26 14:44:51,370 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:54,374 - INFO - Starting anemll-server-core.py (attempt 9)
+2025-06-26 14:44:54,378 - INFO - anemll-server-core.py started with PID: 21065
+2025-06-26 14:44:55,085 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:44:58,085 - INFO - Starting anemll-server-core.py (attempt 10)
+2025-06-26 14:44:58,095 - INFO - anemll-server-core.py started with PID: 21090
+2025-06-26 14:44:58,829 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:01,833 - INFO - Starting anemll-server-core.py (attempt 11)
+2025-06-26 14:45:01,838 - INFO - anemll-server-core.py started with PID: 21126
+2025-06-26 14:45:02,559 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:05,564 - INFO - Starting anemll-server-core.py (attempt 12)
+2025-06-26 14:45:05,566 - INFO - anemll-server-core.py started with PID: 21127
+2025-06-26 14:45:06,255 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:09,260 - INFO - Starting anemll-server-core.py (attempt 13)
+2025-06-26 14:45:09,267 - INFO - anemll-server-core.py started with PID: 21152
+2025-06-26 14:45:09,961 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:12,963 - INFO - Starting anemll-server-core.py (attempt 14)
+2025-06-26 14:45:12,966 - INFO - anemll-server-core.py started with PID: 21179
+2025-06-26 14:45:13,627 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:16,632 - INFO - Starting anemll-server-core.py (attempt 15)
+2025-06-26 14:45:16,640 - INFO - anemll-server-core.py started with PID: 21204
+2025-06-26 14:45:17,389 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:20,394 - INFO - Starting anemll-server-core.py (attempt 16)
+2025-06-26 14:45:20,406 - INFO - anemll-server-core.py started with PID: 21206
+2025-06-26 14:45:21,139 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:24,143 - INFO - Starting anemll-server-core.py (attempt 17)
+2025-06-26 14:45:24,148 - INFO - anemll-server-core.py started with PID: 21232
+2025-06-26 14:45:24,830 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:27,835 - INFO - Starting anemll-server-core.py (attempt 18)
+2025-06-26 14:45:27,841 - INFO - anemll-server-core.py started with PID: 21257
+2025-06-26 14:45:28,599 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:31,610 - INFO - Starting anemll-server-core.py (attempt 19)
+2025-06-26 14:45:31,613 - INFO - anemll-server-core.py started with PID: 21282
+2025-06-26 14:45:32,366 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:35,372 - INFO - Starting anemll-server-core.py (attempt 20)
+2025-06-26 14:45:35,377 - INFO - anemll-server-core.py started with PID: 21283
+2025-06-26 14:45:36,137 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:39,141 - INFO - Starting anemll-server-core.py (attempt 21)
+2025-06-26 14:45:39,145 - INFO - anemll-server-core.py started with PID: 21309
+2025-06-26 14:45:39,871 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:42,875 - INFO - Starting anemll-server-core.py (attempt 22)
+2025-06-26 14:45:42,880 - INFO - anemll-server-core.py started with PID: 21335
+2025-06-26 14:45:43,634 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:46,639 - INFO - Starting anemll-server-core.py (attempt 23)
+2025-06-26 14:45:46,643 - INFO - anemll-server-core.py started with PID: 21360
+2025-06-26 14:45:47,398 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:50,401 - INFO - Starting anemll-server-core.py (attempt 24)
+2025-06-26 14:45:50,404 - INFO - anemll-server-core.py started with PID: 21362
+2025-06-26 14:45:51,182 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:54,187 - INFO - Starting anemll-server-core.py (attempt 25)
+2025-06-26 14:45:54,191 - INFO - anemll-server-core.py started with PID: 21389
+2025-06-26 14:45:54,910 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:45:57,915 - INFO - Starting anemll-server-core.py (attempt 26)
+2025-06-26 14:45:57,921 - INFO - anemll-server-core.py started with PID: 21414
+2025-06-26 14:45:58,648 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:01,652 - INFO - Starting anemll-server-core.py (attempt 27)
+2025-06-26 14:46:01,656 - INFO - anemll-server-core.py started with PID: 21439
+2025-06-26 14:46:02,445 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:05,449 - INFO - Starting anemll-server-core.py (attempt 28)
+2025-06-26 14:46:05,454 - INFO - anemll-server-core.py started with PID: 21442
+2025-06-26 14:46:06,211 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:09,216 - INFO - Starting anemll-server-core.py (attempt 29)
+2025-06-26 14:46:09,221 - INFO - anemll-server-core.py started with PID: 21467
+2025-06-26 14:46:10,135 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:13,136 - INFO - Starting anemll-server-core.py (attempt 30)
+2025-06-26 14:46:13,141 - INFO - anemll-server-core.py started with PID: 21502
+2025-06-26 14:46:13,879 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:16,884 - INFO - Starting anemll-server-core.py (attempt 31)
+2025-06-26 14:46:16,889 - INFO - anemll-server-core.py started with PID: 21526
+2025-06-26 14:46:17,640 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:20,645 - INFO - Starting anemll-server-core.py (attempt 32)
+2025-06-26 14:46:20,653 - INFO - anemll-server-core.py started with PID: 21529
+2025-06-26 14:46:21,440 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:24,446 - INFO - Starting anemll-server-core.py (attempt 33)
+2025-06-26 14:46:24,452 - INFO - anemll-server-core.py started with PID: 21554
+2025-06-26 14:46:25,260 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:28,265 - INFO - Starting anemll-server-core.py (attempt 34)
+2025-06-26 14:46:28,268 - INFO - anemll-server-core.py started with PID: 21579
+2025-06-26 14:46:28,996 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:32,000 - INFO - Starting anemll-server-core.py (attempt 35)
+2025-06-26 14:46:32,005 - INFO - anemll-server-core.py started with PID: 21604
+2025-06-26 14:46:32,769 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:35,772 - INFO - Starting anemll-server-core.py (attempt 36)
+2025-06-26 14:46:35,777 - INFO - anemll-server-core.py started with PID: 21628
+2025-06-26 14:46:36,552 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:39,554 - INFO - Starting anemll-server-core.py (attempt 37)
+2025-06-26 14:46:39,562 - INFO - anemll-server-core.py started with PID: 21630
+2025-06-26 14:46:40,289 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:43,293 - INFO - Starting anemll-server-core.py (attempt 38)
+2025-06-26 14:46:43,296 - INFO - anemll-server-core.py started with PID: 21655
+2025-06-26 14:46:44,065 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:47,066 - INFO - Starting anemll-server-core.py (attempt 39)
+2025-06-26 14:46:47,073 - INFO - anemll-server-core.py started with PID: 21680
+2025-06-26 14:46:47,834 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:50,836 - INFO - Starting anemll-server-core.py (attempt 40)
+2025-06-26 14:46:50,843 - INFO - anemll-server-core.py started with PID: 21708
+2025-06-26 14:46:51,570 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:54,575 - INFO - Starting anemll-server-core.py (attempt 41)
+2025-06-26 14:46:54,583 - INFO - anemll-server-core.py started with PID: 21709
+2025-06-26 14:46:55,378 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:46:58,383 - INFO - Starting anemll-server-core.py (attempt 42)
+2025-06-26 14:46:58,390 - INFO - anemll-server-core.py started with PID: 21735
+2025-06-26 14:46:59,160 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:02,165 - INFO - Starting anemll-server-core.py (attempt 43)
+2025-06-26 14:47:02,169 - INFO - anemll-server-core.py started with PID: 21761
+2025-06-26 14:47:02,910 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:05,915 - INFO - Starting anemll-server-core.py (attempt 44)
+2025-06-26 14:47:05,926 - INFO - anemll-server-core.py started with PID: 21785
+2025-06-26 14:47:06,657 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:09,661 - INFO - Starting anemll-server-core.py (attempt 45)
+2025-06-26 14:47:09,670 - INFO - anemll-server-core.py started with PID: 21787
+2025-06-26 14:47:10,411 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:13,416 - INFO - Starting anemll-server-core.py (attempt 46)
+2025-06-26 14:47:13,421 - INFO - anemll-server-core.py started with PID: 21813
+2025-06-26 14:47:14,165 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:17,170 - INFO - Starting anemll-server-core.py (attempt 47)
+2025-06-26 14:47:17,177 - INFO - anemll-server-core.py started with PID: 21837
+2025-06-26 14:47:17,902 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:20,905 - INFO - Starting anemll-server-core.py (attempt 48)
+2025-06-26 14:47:20,915 - INFO - anemll-server-core.py started with PID: 21864
+2025-06-26 14:47:21,639 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:24,644 - INFO - Starting anemll-server-core.py (attempt 49)
+2025-06-26 14:47:24,652 - INFO - anemll-server-core.py started with PID: 21865
+2025-06-26 14:47:25,370 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:28,375 - INFO - Starting anemll-server-core.py (attempt 50)
+2025-06-26 14:47:28,382 - INFO - anemll-server-core.py started with PID: 21890
+2025-06-26 14:47:29,118 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:32,119 - INFO - Starting anemll-server-core.py (attempt 51)
+2025-06-26 14:47:32,124 - INFO - anemll-server-core.py started with PID: 21916
+2025-06-26 14:47:32,828 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-06-26 14:47:35,832 - INFO - ================================================================================
+2025-06-26 14:47:35,833 - INFO - ANEMLL SERVER v2 MONITORING COMPLETED
+2025-06-26 14:47:35,833 - INFO - Total restarts of anemll-server-core.py: 51
+2025-06-26 14:47:35,833 - INFO - ================================================================================
+2025-06-28 21:48:09,989 - INFO - ================================================================================
+2025-06-28 21:48:09,989 - INFO - ANEMLL SERVER v2 MONITOR WITH AUTO-RESTART & RSS MEMORY TRACKING
+2025-06-28 21:48:09,989 - INFO - ================================================================================
+2025-06-28 21:48:09,989 - INFO - Monitoring process: anemll-server-core.py
+2025-06-28 21:48:09,989 - INFO - Max restarts: 50
+2025-06-28 21:48:09,989 - INFO - Restart delay: 3.0s
+2025-06-28 21:48:09,989 - INFO - Enhanced with RSS memory logging after each completion
+2025-06-28 21:48:09,989 - INFO - Press Ctrl+C to stop monitoring
+2025-06-28 21:48:09,989 - INFO - ================================================================================
+2025-06-28 21:48:09,989 - INFO - Starting anemll-server-core.py (attempt 1)
+2025-06-28 21:48:09,990 - INFO - anemll-server-core.py started with PID: 5905
+2025-06-28 21:48:29,360 - INFO - ✅ Anemll Server v2 is ready and accepting connections
+2025-06-28 21:48:29,360 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes
+2025-07-03 07:16:29,044 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:16:32,046 - INFO - Starting anemll-server-core.py (attempt 2)
+2025-07-03 07:16:32,050 - INFO - anemll-server-core.py started with PID: 81806
+2025-07-03 07:16:39,120 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:16:42,125 - INFO - Starting anemll-server-core.py (attempt 3)
+2025-07-03 07:16:42,128 - INFO - anemll-server-core.py started with PID: 81822
+2025-07-03 07:16:42,885 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:16:45,887 - INFO - Starting anemll-server-core.py (attempt 4)
+2025-07-03 07:16:45,892 - INFO - anemll-server-core.py started with PID: 81828
+2025-07-03 07:16:46,644 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:16:49,647 - INFO - Starting anemll-server-core.py (attempt 5)
+2025-07-03 07:16:49,652 - INFO - anemll-server-core.py started with PID: 81841
+2025-07-03 07:16:50,424 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:16:53,429 - INFO - Starting anemll-server-core.py (attempt 6)
+2025-07-03 07:16:53,431 - INFO - anemll-server-core.py started with PID: 81848
+2025-07-03 07:16:54,182 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:16:57,187 - INFO - Starting anemll-server-core.py (attempt 7)
+2025-07-03 07:16:57,194 - INFO - anemll-server-core.py started with PID: 81851
+2025-07-03 07:16:58,073 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:01,075 - INFO - Starting anemll-server-core.py (attempt 8)
+2025-07-03 07:17:01,080 - INFO - anemll-server-core.py started with PID: 81853
+2025-07-03 07:17:01,846 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:04,851 - INFO - Starting anemll-server-core.py (attempt 9)
+2025-07-03 07:17:04,853 - INFO - anemll-server-core.py started with PID: 81854
+2025-07-03 07:17:05,693 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:08,699 - INFO - Starting anemll-server-core.py (attempt 10)
+2025-07-03 07:17:08,701 - INFO - anemll-server-core.py started with PID: 81857
+2025-07-03 07:17:09,540 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:12,543 - INFO - Starting anemll-server-core.py (attempt 11)
+2025-07-03 07:17:12,549 - INFO - anemll-server-core.py started with PID: 81860
+2025-07-03 07:17:13,770 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:16,773 - INFO - Starting anemll-server-core.py (attempt 12)
+2025-07-03 07:17:16,780 - INFO - anemll-server-core.py started with PID: 81863
+2025-07-03 07:17:17,700 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:20,705 - INFO - Starting anemll-server-core.py (attempt 13)
+2025-07-03 07:17:20,710 - INFO - anemll-server-core.py started with PID: 81864
+2025-07-03 07:17:21,493 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:24,498 - INFO - Starting anemll-server-core.py (attempt 14)
+2025-07-03 07:17:24,502 - INFO - anemll-server-core.py started with PID: 81867
+2025-07-03 07:17:25,245 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:28,249 - INFO - Starting anemll-server-core.py (attempt 15)
+2025-07-03 07:17:28,250 - INFO - anemll-server-core.py started with PID: 81870
+2025-07-03 07:17:29,135 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:32,138 - INFO - Starting anemll-server-core.py (attempt 16)
+2025-07-03 07:17:32,141 - INFO - anemll-server-core.py started with PID: 81872
+2025-07-03 07:17:32,895 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:35,900 - INFO - Starting anemll-server-core.py (attempt 17)
+2025-07-03 07:17:35,903 - INFO - anemll-server-core.py started with PID: 81877
+2025-07-03 07:17:36,676 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:39,679 - INFO - Starting anemll-server-core.py (attempt 18)
+2025-07-03 07:17:39,684 - INFO - anemll-server-core.py started with PID: 81878
+2025-07-03 07:17:40,436 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:43,438 - INFO - Starting anemll-server-core.py (attempt 19)
+2025-07-03 07:17:43,441 - INFO - anemll-server-core.py started with PID: 81880
+2025-07-03 07:17:44,177 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:47,180 - INFO - Starting anemll-server-core.py (attempt 20)
+2025-07-03 07:17:47,183 - INFO - anemll-server-core.py started with PID: 81883
+2025-07-03 07:17:47,939 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:50,944 - INFO - Starting anemll-server-core.py (attempt 21)
+2025-07-03 07:17:50,949 - INFO - anemll-server-core.py started with PID: 81886
+2025-07-03 07:17:51,695 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:54,699 - INFO - Starting anemll-server-core.py (attempt 22)
+2025-07-03 07:17:54,702 - INFO - anemll-server-core.py started with PID: 81888
+2025-07-03 07:17:55,464 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:17:58,470 - INFO - Starting anemll-server-core.py (attempt 23)
+2025-07-03 07:17:58,475 - INFO - anemll-server-core.py started with PID: 81891
+2025-07-03 07:17:59,214 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:02,217 - INFO - Starting anemll-server-core.py (attempt 24)
+2025-07-03 07:18:02,221 - INFO - anemll-server-core.py started with PID: 81894
+2025-07-03 07:18:02,985 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:05,986 - INFO - Starting anemll-server-core.py (attempt 25)
+2025-07-03 07:18:05,991 - INFO - anemll-server-core.py started with PID: 81897
+2025-07-03 07:18:06,738 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:09,744 - INFO - Starting anemll-server-core.py (attempt 26)
+2025-07-03 07:18:09,747 - INFO - anemll-server-core.py started with PID: 81898
+2025-07-03 07:18:10,506 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:13,511 - INFO - Starting anemll-server-core.py (attempt 27)
+2025-07-03 07:18:13,515 - INFO - anemll-server-core.py started with PID: 81900
+2025-07-03 07:18:14,258 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:17,263 - INFO - Starting anemll-server-core.py (attempt 28)
+2025-07-03 07:18:17,266 - INFO - anemll-server-core.py started with PID: 81903
+2025-07-03 07:18:18,008 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:21,011 - INFO - Starting anemll-server-core.py (attempt 29)
+2025-07-03 07:18:21,016 - INFO - anemll-server-core.py started with PID: 81904
+2025-07-03 07:18:21,741 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:24,746 - INFO - Starting anemll-server-core.py (attempt 30)
+2025-07-03 07:18:24,750 - INFO - anemll-server-core.py started with PID: 81908
+2025-07-03 07:18:25,505 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:28,510 - INFO - Starting anemll-server-core.py (attempt 31)
+2025-07-03 07:18:28,515 - INFO - anemll-server-core.py started with PID: 81914
+2025-07-03 07:18:29,435 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:32,439 - INFO - Starting anemll-server-core.py (attempt 32)
+2025-07-03 07:18:32,440 - INFO - anemll-server-core.py started with PID: 81917
+2025-07-03 07:18:33,319 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:36,324 - INFO - Starting anemll-server-core.py (attempt 33)
+2025-07-03 07:18:36,328 - INFO - anemll-server-core.py started with PID: 81922
+2025-07-03 07:18:37,388 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:40,393 - INFO - Starting anemll-server-core.py (attempt 34)
+2025-07-03 07:18:40,403 - INFO - anemll-server-core.py started with PID: 81924
+2025-07-03 07:18:41,385 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:44,387 - INFO - Starting anemll-server-core.py (attempt 35)
+2025-07-03 07:18:44,389 - INFO - anemll-server-core.py started with PID: 81929
+2025-07-03 07:18:45,308 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:48,308 - INFO - Starting anemll-server-core.py (attempt 36)
+2025-07-03 07:18:48,311 - INFO - anemll-server-core.py started with PID: 81934
+2025-07-03 07:18:49,138 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:52,143 - INFO - Starting anemll-server-core.py (attempt 37)
+2025-07-03 07:18:52,147 - INFO - anemll-server-core.py started with PID: 81937
+2025-07-03 07:18:52,920 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:55,924 - INFO - Starting anemll-server-core.py (attempt 38)
+2025-07-03 07:18:55,928 - INFO - anemll-server-core.py started with PID: 81941
+2025-07-03 07:18:56,721 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:18:59,727 - INFO - Starting anemll-server-core.py (attempt 39)
+2025-07-03 07:18:59,730 - INFO - anemll-server-core.py started with PID: 81942
+2025-07-03 07:19:00,490 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:03,493 - INFO - Starting anemll-server-core.py (attempt 40)
+2025-07-03 07:19:03,497 - INFO - anemll-server-core.py started with PID: 81944
+2025-07-03 07:19:04,247 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:07,252 - INFO - Starting anemll-server-core.py (attempt 41)
+2025-07-03 07:19:07,256 - INFO - anemll-server-core.py started with PID: 81947
+2025-07-03 07:19:08,102 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:11,106 - INFO - Starting anemll-server-core.py (attempt 42)
+2025-07-03 07:19:11,110 - INFO - anemll-server-core.py started with PID: 81949
+2025-07-03 07:19:11,945 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:14,950 - INFO - Starting anemll-server-core.py (attempt 43)
+2025-07-03 07:19:14,954 - INFO - anemll-server-core.py started with PID: 81952
+2025-07-03 07:19:15,801 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:18,807 - INFO - Starting anemll-server-core.py (attempt 44)
+2025-07-03 07:19:18,810 - INFO - anemll-server-core.py started with PID: 81955
+2025-07-03 07:19:19,576 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:22,579 - INFO - Starting anemll-server-core.py (attempt 45)
+2025-07-03 07:19:22,584 - INFO - anemll-server-core.py started with PID: 81958
+2025-07-03 07:19:23,521 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:26,522 - INFO - Starting anemll-server-core.py (attempt 46)
+2025-07-03 07:19:26,525 - INFO - anemll-server-core.py started with PID: 81961
+2025-07-03 07:19:27,494 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:30,495 - INFO - Starting anemll-server-core.py (attempt 47)
+2025-07-03 07:19:30,501 - INFO - anemll-server-core.py started with PID: 81962
+2025-07-03 07:19:31,424 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:34,429 - INFO - Starting anemll-server-core.py (attempt 48)
+2025-07-03 07:19:34,430 - INFO - anemll-server-core.py started with PID: 81964
+2025-07-03 07:19:35,303 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:38,309 - INFO - Starting anemll-server-core.py (attempt 49)
+2025-07-03 07:19:38,315 - INFO - anemll-server-core.py started with PID: 81970
+2025-07-03 07:19:39,209 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:42,214 - INFO - Starting anemll-server-core.py (attempt 50)
+2025-07-03 07:19:42,217 - INFO - anemll-server-core.py started with PID: 81976
+2025-07-03 07:19:43,187 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:46,189 - INFO - Starting anemll-server-core.py (attempt 51)
+2025-07-03 07:19:46,193 - INFO - anemll-server-core.py started with PID: 81979
+2025-07-03 07:19:47,106 - ERROR - Error monitoring anemll-server-core.py: [Errno 5] Input/output error
+2025-07-03 07:19:50,111 - INFO - ================================================================================
+2025-07-03 07:19:50,111 - INFO - ANEMLL SERVER v2 MONITORING COMPLETED
+2025-07-03 07:19:50,112 - INFO - Total restarts of anemll-server-core.py: 51
+2025-07-03 07:19:50,112 - INFO - ================================================================================

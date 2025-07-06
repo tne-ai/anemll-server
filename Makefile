@@ -12,8 +12,8 @@ install:
 	uv pip install .
 
 MODEL_DIR ?= ./models
+# anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2
 MODELS ?= anemll-DeepSeekR1-8B-ctx1024_0.2.0 \
-	anemll-Meta-Llama-3.2-1B-ctx2048_0.1.2 \
 	anemll-dwq-llama-3.2-1B-4b-pf6b-ctx1024_0.3.0
 	
 
