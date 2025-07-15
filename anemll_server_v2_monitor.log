@@ -811,3 +811,17 @@
 2025-07-03 07:19:50,111 - INFO - ANEMLL SERVER v2 MONITORING COMPLETED
 2025-07-03 07:19:50,112 - INFO - Total restarts of anemll-server-core.py: 51
 2025-07-03 07:19:50,112 - INFO - ================================================================================
+2025-07-09 11:10:44,951 - INFO - ================================================================================
+2025-07-09 11:10:44,951 - INFO - ANEMLL SERVER v2 MONITOR WITH AUTO-RESTART & RSS MEMORY TRACKING
+2025-07-09 11:10:44,951 - INFO - ================================================================================
+2025-07-09 11:10:44,951 - INFO - Monitoring process: anemll-server-core.py
+2025-07-09 11:10:44,951 - INFO - Max restarts: 50
+2025-07-09 11:10:44,951 - INFO - Restart delay: 3.0s
+2025-07-09 11:10:44,951 - INFO - Enhanced with RSS memory logging after each completion
+2025-07-09 11:10:44,951 - INFO - Press Ctrl+C to stop monitoring
+2025-07-09 11:10:44,951 - INFO - ================================================================================
+2025-07-09 11:10:44,951 - INFO - Starting anemll-server-core.py (attempt 1)
+2025-07-09 11:10:44,953 - INFO - anemll-server-core.py started with PID: 3974
+2025-07-09 11:11:04,796 - INFO - ✅ Anemll Server v2 is ready and accepting connections
+2025-07-09 11:11:04,797 - INFO - 🔍 RSS memory monitoring active - watch for memory patterns before crashes
+2025-07-10 23:45:47,621 - INFO - Received shutdown signal, stopping Anemll Server v2 monitor...
